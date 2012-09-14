@@ -22,5 +22,16 @@
     <rule ref="rulesets/design.xml" />
 
     <!-- Import the entire code size rule set -->
-    <rule ref="rulesets/codesize.xml" />
+    <rule ref="rulesets/codesize.xml">
+        <exclude name="CyclomaticComplexity" />
+    </rule>
+
+    <!-- Customized Cyclomatic Complexity rule -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <priority>1</priority>
+        <properties>
+            <property name="reportLevel" value="15" />
+        </properties>
+    </rule>
+
 </ruleset>
