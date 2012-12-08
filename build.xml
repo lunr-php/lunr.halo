@@ -95,9 +95,6 @@
         <exec executable="phpcpd">
             <arg value="--log-pmd" />
             <arg value="${basedir}/build/logs/pmd-cpd.xml" />
-            <arg value="--suffixes" />
-            <arg value="php" />
-            <arg value="--verbose" />
             <arg path="${basedir}" />
         </exec>
     </target>
@@ -107,9 +104,6 @@
         <exec executable="phploc">
             <arg value="--log-csv" />
             <arg value="${basedir}/build/logs/phploc.csv" />
-            <arg value="--suffixes" />
-            <arg value="php" />
-            <arg value="--verbose" />
             <arg value="--count-tests" />
             <arg path="${basedir}" />
         </exec>
