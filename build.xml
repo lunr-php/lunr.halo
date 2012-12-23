@@ -7,6 +7,7 @@
     <target name="clean"
             description="Cleanup and create build directories">
         <delete dir="${basedir}/build" />
+        <delete dir="${basedir}/tmp" />
 
         <mkdir dir="${basedir}/build/api" />
         <mkdir dir="${basedir}/build/code-browser" />
@@ -121,5 +122,10 @@
         </exec>
     </target>
 
-    <target name="build" depends="clean,parallelTasks,phpunit,phpcb" />
+    <target name="setup"
+            description="Setup runtime environment">
+        <exec executable="support/setup.sh" />
+    </target>
+
+    <target name="build" depends="clean,setup,parallelTasks,phpunit,phpcb" />
 </project>

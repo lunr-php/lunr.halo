@@ -8,3 +8,7 @@ build
 
 # ignore sqlite databases
 *.db
+
+# ignore external interactions
+src/Psr
+src/Resque
