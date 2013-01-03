@@ -14,8 +14,8 @@ PSRLOG="https://github.com/php-fig/log/archive/1.0.0.tar.gz"
 
 if ! [ -e "$DESTDIR/Psr/Log" ]; then
   cd "$TMP"
-    wget "$PSRLOG"
-    tar xvf 1.0.0.tar.gz
+    wget --content-disposition "$PSRLOG"
+    tar xvf log-1.0.0.tar.gz
 
     mv log-1.0.0/Psr "$DESTDIR/"
   cd -
