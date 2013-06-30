@@ -6,9 +6,13 @@
             syntaxCheck="false"
             forceCoversAnnotation="true"
             mapTestClassNameToCoveredClassName="true"
-            colors="true">
+            colors="true"
+            verbose="true">
+    <php>
+        <ini name="zend.enable_gc" value="0" />
+    </php>
     <testsuites>
-        <testsuite name="Lunr Testsuite">
+        <testsuite name="Halo">
         </testsuite>
     </testsuites>
     <filter>
