@@ -22,6 +22,7 @@ set_include_path(
     $base . '/config:' .
     $base . '/system:' .
     $base . '/tests/statics:' .
+    $base . '/tests/statics/Core:' .
     get_include_path()
 );
 
