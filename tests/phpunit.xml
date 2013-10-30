@@ -19,8 +19,7 @@
         <whitelist>
             <directory>../src/Lunr/</directory>
             <exclude>
-                <file>../src/Lunr/Halo/LunrBaseTest.php</file>
-                <directory>../src/Lunr/Halo/Tests/</directory>
+                <directory>../src/Lunr/Halo/</directory>
             </exclude>
         </whitelist>
     </filter>
