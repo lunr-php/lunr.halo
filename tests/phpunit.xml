@@ -9,7 +9,7 @@
             colors="true"
             verbose="true">
     <php>
-        <ini name="zend.enable_gc" value="0" />
+        <ini name="zend.enable_gc" value="1" />
     </php>
     <testsuites>
         <testsuite name="Halo">
