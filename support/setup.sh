@@ -10,14 +10,14 @@ if ! [ -e "$TMP" ]; then
 fi
 
 # interactions download locations
-PSRLOG="https://github.com/php-fig/log/archive/1.0.0.tar.gz"
+PSRLOG="https://github.com/php-fig/log/archive/1.0.2.tar.gz"
 
 if ! [ -e "$DESTDIR/Psr/Log" ]; then
   cd "$TMP"
     wget --content-disposition "$PSRLOG"
-    tar xvf log-1.0.0.tar.gz
+    tar xvf log-1.0.2.tar.gz
 
-    mv log-1.0.0/Psr "$DESTDIR/"
+    mv log-1.0.2/Psr "$DESTDIR/"
   cd -
 fi
 
