@@ -1,0 +1,19 @@
+{
+  "require": {
+    "psr/log": "~1.0.2",
+    "php": "5.6.*"
+  },
+  "suggest": {
+    "ext-uopz": "Needed for unit tests on PHP 7 as a replacement for runkit"
+  },
+  "require-dev": {
+    "ext-runkit": "~1.0.4",
+    "ext-xdebug": "~2.4"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "psr-4": {"Lunr\\": "src/Lunr/"}
+  }
+}
