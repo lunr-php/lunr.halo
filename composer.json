@@ -1,13 +1,14 @@
 {
   "require": {
     "psr/log": "~1.0.2",
-    "php": "5.6.*"
+    "php": "5.6.* || 7.*"
   },
   "suggest": {
-    "ext-uopz": "Needed for unit tests on PHP 7 as a replacement for runkit"
+    "ext-uopz": "Needed for unit tests on PHP 7 to mock internals",
+    "ext-runkit": "Needed for unit tests on PHP 5 to mock internals"
   },
   "require-dev": {
-    "ext-runkit": "~1.0.4",
+    "phpunit/phpunit": "~5.7",
     "ext-xdebug": "~2.4"
   },
   "config": {
