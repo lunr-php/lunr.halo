@@ -9,7 +9,6 @@ build
 # ignore sqlite databases
 *.db
 
-# ignore external interactions
-src/Psr
-src/Resque
+# ignore generated files
 vendor
+decomposer.autoload.inc.php
