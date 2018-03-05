@@ -6,9 +6,6 @@
 # ignore test results
 build
 
-# ignore sqlite databases
-*.db
-
 # ignore generated files
 vendor
 decomposer.autoload.inc.php
