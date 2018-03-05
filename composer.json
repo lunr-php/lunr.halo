@@ -15,6 +15,6 @@
     "optimize-autoloader": true
   },
   "autoload": {
-    "psr-4": {"Lunr\\": "src/Lunr/"}
+    "psr-4": {"Lunr\\Halo\\": "src/Lunr/Halo/"}
   }
 }
