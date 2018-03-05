@@ -41,7 +41,6 @@ pipeline {
                 ant_sh('clean')
                 dependencies(env.dependency_tool)
                 ant_sh('pdepend')
-                ant_sh('l10n')
             }
         }
 
