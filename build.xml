@@ -1,4 +1,4 @@
-<project name="Lunr" default="build" basedir=".">
+<project name="Lunr.Halo" default="build" basedir=".">
 
     <property name="system" value="src/Lunr" />
     <property name="tests" value="tests" />

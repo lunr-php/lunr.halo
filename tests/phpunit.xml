@@ -26,7 +26,7 @@
     <logging>
         <log    type="coverage-html"
                 target="../build/coverage"
-                title="Lunr"
+                title="Lunr.Halo"
                 charset="UTF-8"
                 yui="true"
                 highlight="true"

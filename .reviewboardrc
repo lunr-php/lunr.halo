@@ -1,7 +1,7 @@
-# ReviewBoard Configuration for Lunr
+# ReviewBoard Configuration for Lunr.Halo
 
 # Repository name
-REPOSITORY = "Lunr"
+REPOSITORY = "Lunr.Halo"
 
 # ReviewBoard Server URL
 REVIEWBOARD_URL = "http://reviews.lunr.nl"
