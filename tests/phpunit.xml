@@ -13,13 +13,15 @@
     </php>
     <testsuites>
         <testsuite name="Halo">
+            <file>../src/Lunr/Halo/Tests/LunrBaseTestReflectionTest.php</file>
+            <file>../src/Lunr/Halo/Tests/LunrBaseTestMockTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
             <directory>../src/Lunr/</directory>
             <exclude>
-                <directory>../src/Lunr/Halo/</directory>
+                <directory>../src/Lunr/Halo/Tests/</directory>
             </exclude>
         </whitelist>
     </filter>

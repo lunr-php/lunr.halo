@@ -14,7 +14,6 @@
 namespace Lunr\Halo\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
 /**
@@ -22,12 +21,12 @@ use ReflectionClass;
  *
  * @covers Lunr\Halo\LunrBaseTest
  */
-class LunrBaseTestTest extends PHPUnit_Framework_TestCase
+class LunrBaseTestTest extends LunrBaseTest
 {
 
     /**
-     * Instance of the LunrBaseTest class.
-     * @var LunrBaseTest
+     * Instance of a mock class.
+     * @var MockClass
      */
     protected $class;
 
@@ -42,8 +41,8 @@ class LunrBaseTestTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->class      = $this->getMockForAbstractClass('Lunr\Halo\LunrBaseTest');
-        $this->reflection = new ReflectionClass('Lunr\Halo\LunrBaseTest');
+        $this->class      = $this->getMockBuilder('Lunr\Halo\Tests\MockClass')->getMock();
+        $this->reflection = new ReflectionClass('Lunr\Halo\Tests\MockClass');
     }
 
     /**
@@ -53,28 +52,6 @@ class LunrBaseTestTest extends PHPUnit_Framework_TestCase
     {
         unset($this->class);
         unset($this->reflection);
-    }
-
-    /**
-     * Test that the 'class' property is not set by default.
-     */
-    public function testClassIsUnset()
-    {
-        $property = $this->reflection->getProperty('class');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->class));
-    }
-
-    /**
-     * Test that the 'reflection' property is not set by default.
-     */
-    public function testReflectionIsUnset()
-    {
-        $property = $this->reflection->getProperty('reflection');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->class));
     }
 
 }
