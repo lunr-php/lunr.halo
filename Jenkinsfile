@@ -50,8 +50,7 @@ pipeline {
                     md: { ant_sh('phpmd-ci') },
                     cpd: { ant_sh('phpcpd') },
                     cs: { ant_sh('phpcs-ci') },
-                    loc: { ant_sh('phploc') },
-                    doc: { ant_sh('phpdoc') }
+                    loc: { ant_sh('phploc') }
                 )
             }
         }
@@ -63,6 +62,17 @@ pipeline {
             post {
                 success {
                     junit 'build/logs/junit.xml'
+                }
+            }
+        }
+
+        stage('SonarQube Analysis'){
+            when {
+                branch 'master'
+            }
+            steps{
+                withSonarQubeEnv('M2mobi') {
+                    sh "sonar-scanner -Dsonar.projectKey=php:lunr.halo -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
                 }
             }
         }
