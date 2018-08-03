@@ -1,4 +1,10 @@
 {
+  "name": "lunr/halo",
+  "description": "Lunr.Halo is a set of PHPUnit helper libraries.",
+  "keywords": [ "phpunit", "unit tests", "mocking" ],
+  "homepage": "https://github.com/M2Mobi/lunr.halo",
+  "type": "library",
+  "license": "MIT",
   "require": {
     "psr/log": "~1.0.2",
     "php": "5.6.* || 7.*"
