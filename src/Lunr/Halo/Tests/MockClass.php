@@ -3,8 +3,6 @@
 /**
  * This file contains a mock class.
  *
- * PHP Version 7.0
- *
  * @package    Lunr\Halo
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2018, M2Mobi BV, Amsterdam, The Netherlands
