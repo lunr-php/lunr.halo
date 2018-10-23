@@ -13,6 +13,7 @@ namespace Lunr\Halo;
 
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Throwable;
 use Closure;
 
 /**
@@ -326,6 +327,35 @@ abstract class LunrBaseTest extends TestCase
     {
         $property = $this->get_accessible_reflection_property($property);
         $this->assertEmpty($property->getValue($this->class));
+    }
+
+    /**
+     * Assert that a property value was unset.
+     *
+     * @param string $property Property name
+     *
+     * @return void
+     */
+    protected function assertPropertyUnset($property)
+    {
+        $this->assertTrue(property_exists($this->class, $property));
+
+        try
+        {
+            $property = $this->get_accessible_reflection_property($property);
+            $this->assertNull($property->getValue($this->class));
+        }
+        catch (Throwable $e)
+        {
+            $message = $e->getMessage();
+
+            if (strpos($message, 'Failed asserting that') !== FALSE)
+            {
+                throw $e;
+            }
+
+            $this->assertContains("Cannot access", $message);
+        }
     }
 
     /**
