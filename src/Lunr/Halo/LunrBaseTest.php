@@ -115,44 +115,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function mock_function($name, $mock)
     {
-        if (PHP_MAJOR_VERSION < 7)
-        {
-            $this->runkit_mock_function($name, $mock);
-
-            return;
-        }
-
         $this->uopz_mock_function($name, $mock);
-    }
-
-    /**
-     * Mock a PHP function with runkit.
-     *
-     * @param string          $name Function name
-     * @param string|\Closure $mock Replacement code for the function
-     *
-     * @return void
-     */
-    private function runkit_mock_function($name, $mock)
-    {
-        if (!extension_loaded('runkit'))
-        {
-            $this->markTestSkipped('The runkit extension is not available.');
-            return;
-        }
-
-        if (function_exists($name . self::FUNCTION_ID) === FALSE)
-        {
-            runkit_function_copy($name, $name . self::FUNCTION_ID);
-        }
-
-        if ($mock instanceof Closure)
-        {
-            runkit_function_redefine($name, $mock);
-            return;
-        }
-
-        runkit_function_redefine($name, '', $mock);
     }
 
     /**
@@ -192,32 +155,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function unmock_function($name)
     {
-        if (PHP_MAJOR_VERSION < 7)
-        {
-            $this->runkit_unmock_function($name);
-
-            return;
-        }
-
         $this->uopz_unmock_function($name);
-    }
-
-    /**
-     * Unmock a PHP function with runkit.
-     *
-     * @param string $name Function name
-     *
-     * @return void
-     */
-    private function runkit_unmock_function($name)
-    {
-        if (!extension_loaded('runkit'))
-        {
-            return;
-        }
-
-        runkit_function_remove($name);
-        runkit_function_rename($name . self::FUNCTION_ID, $name);
     }
 
     /**
@@ -251,59 +189,8 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function mock_method($method, $mock, $visibility = 'public', $args = '')
     {
-        if (PHP_MAJOR_VERSION < 7)
-        {
-            $this->runkit_mock_method($method, $mock, $visibility, $args);
-
-            return;
-        }
-
         //UOPZ does not support changing the visibility with the currently used function
         $this->uopz_mock_method($method, $mock, $args);
-    }
-
-    /**
-     * Mock a method with runkit.
-     *
-     * Replace the code of a function of a specific class
-     *
-     * @param callable $method     Method defined in an array form
-     * @param string   $mock       Replacement code for the method
-     * @param string   $visibility Visibility of the redefined method
-     * @param string   $args       Comma-delimited list of arguments for the redefined method
-     *
-     * @return void
-     */
-    private function runkit_mock_method($method, $mock, $visibility = 'public', $args = '')
-    {
-        if (!extension_loaded('runkit'))
-        {
-            $this->markTestSkipped('The runkit extension is not available.');
-            return;
-        }
-
-        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
-        $method_name = $method[1];
-
-        if (method_exists($class_name, $method_name . self::FUNCTION_ID) === FALSE)
-        {
-            runkit_method_copy($class_name, $method_name . self::FUNCTION_ID, $class_name, $method_name);
-        }
-
-        switch ($visibility)
-        {
-            case 'public':
-                $visibility_flag = RUNKIT_ACC_PUBLIC;
-                break;
-            case 'protected':
-                $visibility_flag = RUNKIT_ACC_PROTECTED;
-                break;
-            case 'private':
-                $visibility_flag = RUNKIT_ACC_PRIVATE;
-                break;
-        }
-
-        runkit_method_redefine($class_name, $method_name, $args, $mock, $visibility_flag);
     }
 
     /**
@@ -352,35 +239,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function unmock_method($method)
     {
-        if (PHP_MAJOR_VERSION < 7)
-        {
-            $this->runkit_unmock_method($method);
-
-            return;
-        }
-
         $this->uopz_unmock_method($method);
-    }
-
-    /**
-     * Unmock a method with runkit.
-     *
-     * @param callable $method Method defined in an array form
-     *
-     * @return void
-     */
-    private function runkit_unmock_method($method)
-    {
-        if (!extension_loaded('runkit'))
-        {
-            return;
-        }
-
-        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
-        $method_name = $method[1];
-
-        runkit_method_remove($class_name, $method_name);
-        runkit_method_rename($class_name, $method_name . self::FUNCTION_ID, $method_name);
     }
 
     /**
@@ -404,9 +263,9 @@ abstract class LunrBaseTest extends TestCase
     }
 
     /**
-     * Redefine a constant with runkit or uopz
+     * Redefine a constant with uopz
      *
-     * TODO: Figure out why this won' work
+     * TODO: Figure out why this won't work
      *
      * @param string $constant The constant
      * @param mixed  $value    New value
@@ -415,19 +274,6 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function constant_redefine($constant, $value)
     {
-        if (PHP_MAJOR_VERSION < 7)
-        {
-            if (!extension_loaded('runkit'))
-            {
-                $this->markTestSkipped('The runkit extension is not available.');
-                return;
-            }
-
-            runkit_constant_redefine($constant, $value);
-
-            return;
-        }
-
         if (!extension_loaded('uopz'))
         {
             $this->markTestSkipped('The uopz extension is not available.');
