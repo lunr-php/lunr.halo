@@ -332,17 +332,18 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Assert that a property value was unset.
      *
-     * @param string $property Property name
+     * @param string $name Property name
      *
      * @return void
      */
-    protected function assertPropertyUnset($property)
+    protected function assertPropertyUnset($name)
     {
-        $this->assertTrue(property_exists($this->class, $property));
+        $this->assertTrue(property_exists($this->class, $name));
 
         try
         {
-            $property = $this->get_accessible_reflection_property($property);
+            $property = $this->get_accessible_reflection_property($name);
+
             $this->assertNull($property->getValue($this->class));
         }
         catch (Throwable $e)
@@ -354,7 +355,15 @@ abstract class LunrBaseTest extends TestCase
                 throw $e;
             }
 
-            $this->assertContains("Cannot access", $message);
+            if ($e instanceof \PHPUnit\Framework\Error\Notice)
+            {
+                $this->assertContains("Undefined property", $message);
+                $this->assertContains("::\$$name", $message);
+            }
+            else
+            {
+                $this->assertContains('Cannot access', $message);
+            }
         }
     }
 
