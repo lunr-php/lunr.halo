@@ -1,4 +1,5 @@
 # Lunr.Halo
+[![build status](https://api.travis-ci.org/M2Mobi/lunr.halo.svg)](https://travis-ci.org/M2Mobi/lunr.halo) [![codecov](https://codecov.io/gh/M2Mobi/lunr.halo/branch/master/graph/badge.svg)](https://codecov.io/gh/M2Mobi/lunr.halo)
 
 Lunr.Halo is a set of PHPUnit helper libraries.
 
