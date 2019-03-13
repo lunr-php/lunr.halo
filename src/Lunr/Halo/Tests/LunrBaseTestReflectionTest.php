@@ -24,7 +24,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::get_accessible_reflection_method
      */
-    public function testGetAccessibleReflectionMethod()
+    public function testGetAccessibleReflectionMethod(): void
     {
         $method = $this->get_accessible_reflection_method('baz');
 
@@ -37,7 +37,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::get_accessible_reflection_property
      */
-    public function testGetAccessibleReflectionProperty()
+    public function testGetAccessibleReflectionProperty(): void
     {
         $property = $this->get_accessible_reflection_property('foo');
 
@@ -50,7 +50,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::get_reflection_property_value
      */
-    public function testGetReflectionPropertyValue()
+    public function testGetReflectionPropertyValue(): void
     {
         $value = $this->get_reflection_property_value('foo');
 
@@ -62,7 +62,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::set_reflection_property_value
      */
-    public function testSetReflectionPropertyValue()
+    public function testSetReflectionPropertyValue(): void
     {
         $this->set_reflection_property_value('foo', 'foo');
 

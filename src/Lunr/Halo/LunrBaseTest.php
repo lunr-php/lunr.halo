@@ -43,7 +43,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

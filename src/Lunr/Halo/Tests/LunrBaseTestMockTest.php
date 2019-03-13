@@ -24,7 +24,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_function()
      */
-    public function testMockFunction()
+    public function testMockFunction(): void
     {
         $this->mock_function('is_int', function (){ return 'Nope!'; });
 
@@ -38,7 +38,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_function()
      */
-    public function testMockFunctionWithString()
+    public function testMockFunctionWithString(): void
     {
         $this->mock_function('is_int', "return 'Nope!';");
 
@@ -52,7 +52,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::unmock_function()
      */
-    public function testUnmockFunction()
+    public function testUnmockFunction(): void
     {
         $this->mock_function('is_int', function (){ return 'Nope!'; });
 
@@ -68,7 +68,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_method()
      */
-    public function testMockMethod()
+    public function testMockMethod(): void
     {
         $this->mock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ], function (){ return 'Nope!'; });
 
@@ -84,7 +84,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_method()
      */
-    public function testMockMethodWithString()
+    public function testMockMethodWithString(): void
     {
         $this->mock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ], "return 'Nope!';");
 
@@ -100,7 +100,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_method()
      */
-    public function testMockMethodFromObject()
+    public function testMockMethodFromObject(): void
     {
         $this->mock_method([ $this->class, 'baz' ], function (){ return 'Nope!'; });
 
@@ -114,7 +114,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_method()
      */
-    public function testMockMethodFromObjectWithString()
+    public function testMockMethodFromObjectWithString(): void
     {
         $this->mock_method([ $this->class, 'baz' ], "return 'Nope!';");
 
@@ -128,7 +128,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::unmock_method()
      */
-    public function testUnmockMethod()
+    public function testUnmockMethod(): void
     {
         $this->mock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ], function (){ return 'Nope!'; });
 
@@ -146,11 +146,11 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::unmock_method()
      */
-    public function testUnmockMethodFromObject()
+    public function testUnmockMethodFromObject(): void
     {
         if (phpversion('uopz')[0] < 6)
         {
-            $this->markTestSkipped("This functionality requires uopz >= 6.0.x to work correctly");
+            $this->markTestSkipped('This functionality requires uopz >= 6.0.x to work correctly');
         }
 
         $this->mock_method([ $this->class, 'baz' ], function (){ return 'Nope!'; });
@@ -167,7 +167,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
      */
-    public function testConstantRedefineWithPublicConstant()
+    public function testConstantRedefineWithPublicConstant(): void
     {
         $this->assertSame('constant', $this->class::FOOBAR);
 
@@ -189,7 +189,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
      */
-    public function testConstantRedefineWithProtectedConstant()
+    public function testConstantRedefineWithProtectedConstant(): void
     {
         $this->assertSame('constant', $this->class->constant());
 
@@ -215,12 +215,12 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
         $this->assertSame('constant', $constant);
     }
 
-    /*
+    /**
      * Test constant_redefine() with a global constant
      *
      * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
      */
-    public function testGlobalConstantRedefine()
+    public function testGlobalConstantRedefine(): void
     {
         define('FOOBAR', 'constant');
         $this->assertSame('constant', FOOBAR);

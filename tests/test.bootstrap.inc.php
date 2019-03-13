@@ -5,12 +5,10 @@
  *
  * Set include path and initialize autoloader.
  *
- * @category   Loaders
- * @package    Tests
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Halo
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2011-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 $base = __DIR__ . '/..';

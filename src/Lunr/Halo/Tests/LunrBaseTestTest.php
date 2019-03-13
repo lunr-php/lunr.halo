@@ -37,7 +37,7 @@ class LunrBaseTestTest extends LunrBaseTest
     /**
      * Unit test constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new MockClass();
         $this->reflection = new ReflectionClass('Lunr\Halo\Tests\MockClass');
@@ -46,7 +46,7 @@ class LunrBaseTestTest extends LunrBaseTest
     /**
      * Unit test destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

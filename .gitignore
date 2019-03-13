@@ -9,3 +9,4 @@ build
 # ignore generated files
 vendor
 decomposer.autoload.inc.php
+**/.phpunit.result.cache

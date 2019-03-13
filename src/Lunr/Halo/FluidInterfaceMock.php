@@ -67,7 +67,7 @@ class FluidInterfaceMock
      *
      * @return void
      */
-    public function mock($name, $value)
+    public function mock($name, $value): void
     {
         if (!array_key_exists($name, $this->return))
         {
