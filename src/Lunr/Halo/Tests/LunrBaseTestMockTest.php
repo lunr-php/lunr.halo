@@ -148,7 +148,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testUnmockMethodFromObject()
     {
-        $this->markTestSkipped("uopz currently doesn't handling unmocking with class instances correctly.");
+        $this->markTestSkipped("uopz currently doesn't handle unmocking with class instances correctly.");
 
         $this->mock_method([ $this->class, 'baz' ], function (){ return 'Nope!'; });
 
