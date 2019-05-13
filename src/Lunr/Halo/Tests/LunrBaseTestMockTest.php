@@ -148,7 +148,10 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testUnmockMethodFromObject()
     {
-        $this->markTestSkipped("uopz currently doesn't handle unmocking with class instances correctly.");
+        if (phpversion('uopz')[0] < 6)
+        {
+            $this->markTestSkipped("This functionality requires uopz >= 6.0.x to work correctly");
+        }
 
         $this->mock_method([ $this->class, 'baz' ], function (){ return 'Nope!'; });
 
@@ -164,7 +167,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
      */
-    public function testConstantRedefine()
+    public function testConstantRedefineWithPublicConstant()
     {
         $this->assertSame('constant', $this->class::FOOBAR);
 
@@ -179,6 +182,37 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
         $class = new MockClass();
 
         $this->assertSame('constant', $class::FOOBAR);
+    }
+
+    /**
+     * Test constant_redefine()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
+     */
+    public function testConstantRedefineWithProtectedConstant()
+    {
+        $this->assertSame('constant', $this->class->constant());
+
+        $constant = $this->reflection->getConstant('BARFOO');
+
+        $this->assertSame('constant', $constant);
+
+        $this->constant_redefine('Lunr\Halo\Tests\MockClass::BARFOO', 'new value');
+
+        // https://github.com/krakjoe/uopz/issues/111
+        //$this->assertSame('new value', $this->class->constant());
+
+        $constant = $this->reflection->getConstant('BARFOO');
+
+        $this->assertSame('new value', $constant);
+
+        $this->constant_redefine('Lunr\Halo\Tests\MockClass::BARFOO', 'constant');
+
+        $this->assertSame('constant', $this->class->constant());
+
+        $constant = $this->reflection->getConstant('BARFOO');
+
+        $this->assertSame('constant', $constant);
     }
 
 }

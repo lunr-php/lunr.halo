@@ -39,7 +39,7 @@ class LunrBaseTestTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->class      = $this->getMockBuilder('Lunr\Halo\Tests\MockClass')->getMock();
+        $this->class      = new MockClass();
         $this->reflection = new ReflectionClass('Lunr\Halo\Tests\MockClass');
     }
 

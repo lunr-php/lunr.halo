@@ -24,6 +24,12 @@ class MockClass
     const FOOBAR = 'constant';
 
     /**
+     * Another constant.
+     * @var string
+     */
+    protected const BARFOO = 'constant';
+
+    /**
      * Protected property.
      * @var string
      */
@@ -43,6 +49,16 @@ class MockClass
     public function __destruct()
     {
         unset($this->foo);
+    }
+
+    /**
+     * A method returning a constant value.
+     *
+     * @return string String value
+     */
+    public function constant()
+    {
+        return self::BARFOO;
     }
 
     /**
