@@ -215,6 +215,25 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
         $this->assertSame('constant', $constant);
     }
 
+    /*
+     * Test constant_redefine() with a global constant
+     *
+     * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
+     */
+    public function testGlobalConstantRedefine()
+    {
+        define('FOOBAR', 'constant');
+        $this->assertSame('constant', FOOBAR);
+
+        $this->constant_redefine('FOOBAR', 'new value');
+
+        $this->assertSame('new value', FOOBAR);
+
+        $this->constant_redefine('FOOBAR', 'constant');
+
+        $this->assertSame('constant', FOOBAR);
+    }
+
 }
 
 ?>

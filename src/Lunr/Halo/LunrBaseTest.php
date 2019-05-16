@@ -281,11 +281,16 @@ abstract class LunrBaseTest extends TestCase
             return;
         }
 
-        $constant      = explode('::', $constant);
-        $class_name    = $constant[0];
-        $constant_name = $constant[1];
+        $constant = explode('::', $constant);
 
-        uopz_redefine($class_name, $constant_name, $value);
+        if (isset($constant[1]))
+        {
+            uopz_redefine($constant[0], $constant[1], $value);
+        }
+        else
+        {
+            uopz_redefine($constant[0], $value);
+        }
     }
 
     /**
