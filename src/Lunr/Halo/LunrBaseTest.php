@@ -381,7 +381,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function assertArrayEmpty($value)
     {
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -394,7 +394,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function assertArrayNotEmpty($value)
     {
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertNotEmpty($value);
     }
 
