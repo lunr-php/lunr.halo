@@ -362,12 +362,12 @@ abstract class LunrBaseTest extends TestCase
 
             if ($e instanceof \PHPUnit\Framework\Error\Notice)
             {
-                $this->assertContains("Undefined property", $message);
-                $this->assertContains("::\$$name", $message);
+                $this->assertStringContainsString("Undefined property", $message);
+                $this->assertStringContainsString("::\$$name", $message);
             }
             else
             {
-                $this->assertContains('Cannot access', $message);
+                $this->assertStringContainsString('Cannot access', $message);
             }
         }
     }
