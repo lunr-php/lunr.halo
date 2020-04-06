@@ -293,6 +293,33 @@ abstract class LunrBaseTest extends TestCase
     }
 
     /**
+     * Undefine a constant with uopz
+     *
+     * @param string $constant The constant
+     *
+     * @return void
+     */
+    protected function constant_undefine($constant)
+    {
+        if (!extension_loaded('uopz'))
+        {
+            $this->markTestSkipped('The uopz extension is not available.');
+            return;
+        }
+
+        $constant = explode('::', $constant);
+
+        if (isset($constant[1]))
+        {
+            uopz_undefine($constant[0], $constant[1]);
+        }
+        else
+        {
+            uopz_undefine($constant[0]);
+        }
+    }
+
+    /**
      * Assert that a property value equals the expected value.
      *
      * @param string $property Property name
