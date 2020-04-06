@@ -18,6 +18,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
+  - ./vendor/bin/phpstan analyse --level=4 src/
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

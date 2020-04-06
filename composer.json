@@ -12,6 +12,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "~8.0",
+    "phpstan/phpstan": "^0.12.18",
+    "phpstan/phpstan-phpunit": "^0.12.6",
     "ext-xdebug": ">=2.6"
   },
   "config": {
