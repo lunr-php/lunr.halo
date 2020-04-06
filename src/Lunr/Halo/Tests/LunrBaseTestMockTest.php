@@ -34,7 +34,9 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     }
 
     /**
-     * Test mock_function()
+     * Test mock_function() with string
+     *
+     * @deprecated should be called with Closure
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_function()
      */
@@ -82,6 +84,8 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test mock_method()
      *
+     * @deprecated should be called with Closure
+     *
      * @covers Lunr\Halo\LunrBaseTest::mock_method()
      */
     public function testMockMethodWithString(): void
@@ -111,6 +115,8 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
 
     /**
      * Test mock_method()
+     *
+     * @deprecated should be called with Closure
      *
      * @covers Lunr\Halo\LunrBaseTest::mock_method()
      */
@@ -232,6 +238,52 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
         $this->constant_redefine('FOOBAR', 'constant');
 
         $this->assertSame('constant', FOOBAR);
+    }
+
+    /**
+     * Test constant_undefine()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::constant_undefine()
+     */
+    public function testConstantUndefineWithPublicConstant(): void
+    {
+        $this->assertSame('constant', $this->class::FOOBAR);
+
+        $this->constant_undefine('Lunr\Halo\Tests\MockClass::FOOBAR');
+
+        $this->assertFalse(defined('Lunr\Halo\Tests\MockClass::FOOBAR'));
+    }
+
+    /**
+     * Test constant_undefine()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::constant_undefine()
+     */
+    public function testConstantUndefineWithProtectedConstant(): void
+    {
+        $this->assertSame('constant', $this->class->constant());
+
+        $constant = $this->reflection->getConstant('BARFOO');
+
+        $this->assertSame('constant', $constant);
+
+        $this->constant_undefine('Lunr\Halo\Tests\MockClass::BARFOO');
+
+        $this->assertFalse(defined('Lunr\Halo\Tests\MockClass::BARFOO'));
+    }
+
+    /**
+     * Test constant_undefine() with a global constant
+     *
+     * @covers Lunr\Halo\LunrBaseTest::constant_undefine()
+     */
+    public function testGlobalConstantUndefine(): void
+    {
+        $this->assertSame('constant', FOOBAR);
+
+        $this->constant_undefine('FOOBAR');
+
+        $this->assertFalse(defined('FOOBAR'));
     }
 
 }
