@@ -47,6 +47,7 @@ pipeline {
                     publishHTML([
                             reportName: 'PDepend Reports',
                             reportDir: 'build/pdepend',
+                            alwaysLinkToLastBuild: true,
                             reportFiles: '',
                             keepAll: true,
                             allowMissing: false
