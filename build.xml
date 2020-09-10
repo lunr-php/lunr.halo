@@ -15,6 +15,8 @@
         <mkdir dir="${basedir}/build/coverage" />
         <mkdir dir="${basedir}/build/logs" />
         <mkdir dir="${basedir}/build/pdepend" />
+
+        <touch file="${basedir}/build/logs/phpstan.xml" mkdirs="true" verbose="true" />
     </target>
 
     <target name="parallelTasks"
@@ -25,8 +27,8 @@
                 <antcall target="phpmd-ci"/>
             </sequential>
             <antcall target="phpcpd"/>
-            <antcall target="phpcs-ci"/>
-            <antcall target="phpdoc"/>
+            <antcall target="phpcs"/>
+            <antcall target="phpstan-ci"/>
             <antcall target="phploc"/>
         </parallel>
     </target>
@@ -73,29 +75,11 @@
         </exec>
     </target>
 
-    <target name="phpdoc"
-            description="Generate API documentation">
-        <exec executable="phpdoc">
-            <arg value="-c" />
-            <arg value="tests/phpdoc.xml" />
-            <arg value="--parseprivate" />
-        </exec>
-    </target>
-
     <target name="phpcs"
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
-            <arg value="--standard=${coding_standard}/Lunr/" />
-            <arg value="--ignore=html\.*" />
-            <arg path="${system}" />
-        </exec>
-    </target>
-
-    <target name="phpcs-ci"
-            description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
-        <exec executable="phpcs" output="/dev/null">
-            <arg value="--report=checkstyle" />
-            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+            <arg value="--report-full" />
+            <arg value="--report-checkstyle=${basedir}/build/logs/checkstyle.xml" />
             <arg value="--standard=${coding_standard}/Lunr/" />
             <arg value="--ignore=html\.*" />
             <arg path="${system}" />
@@ -139,6 +123,36 @@
             <arg path="${system}" />
             <arg value="--output" />
             <arg path="${basedir}/build/code-browser" />
+        </exec>
+    </target>
+
+    <target name="phpstan"
+            description="Analyse code with PHPStan">
+        <exec executable="phpstan">
+            <arg value="analyse" />
+            <arg path="${basedir}/src" />
+            <arg value="-c" />
+            <arg value="${basedir}/tests/phpstan.neon.dist" />
+            <arg value="--level" />
+            <arg value="2" />
+            <arg value="--no-progress" />
+            <arg value="--no-interaction" />
+        </exec>
+    </target>
+
+    <target name="phpstan-ci"
+            description="Analyse code with PHPStan">
+        <exec executable="phpstan" output="${basedir}/build/logs/phpstan.xml">
+            <arg value="analyse" />
+            <arg path="${basedir}/src" />
+            <arg value="-c" />
+            <arg value="${basedir}/tests/phpstan.neon.dist" />
+            <arg value="--level" />
+            <arg value="2" />
+            <arg value="--error-format" />
+            <arg value="checkstyle" />
+            <arg value="--no-progress" />
+            <arg value="--no-interaction" />
         </exec>
     </target>
 

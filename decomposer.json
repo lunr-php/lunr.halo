@@ -6,5 +6,13 @@
             "prefix": "Psr\\Log",
             "search-path": "/Psr/Log/"
         }
+    },
+    "PHPUnit": {
+        "url": "https://github.com/sebastianbergmann/phpunit.git",
+        "version": "7.5.20",
+        "psr4": {
+            "prefix": "PHPUnit",
+            "search-path": "/src/"
+        }
     }
 }

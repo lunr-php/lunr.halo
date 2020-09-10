@@ -61,7 +61,8 @@ pipeline {
                 parallel (
                     md: { ant_sh('phpmd-ci') },
                     cpd: { ant_sh('phpcpd') },
-                    cs: { ant_sh('phpcs-ci') },
+                    cs: { ant_sh('phpcs') },
+                    stan: { ant_sh('phpstan-ci') },
                     loc: { ant_sh('phploc') }
                 )
             }
@@ -69,6 +70,7 @@ pipeline {
                 always {
                     recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/logs/pmd.xml')
                     recordIssues enabledForFailure: true, tool: cpd(pattern: 'build/logs/pmd-cpd.xml')
+                    recordIssues enabledForFailure: true, tool: phpStan(pattern: 'build/logs/phpstan.xml')
                     recordIssues enabledForFailure: true, tool: checkStyle(pattern: 'build/logs/checkstyle.xml'), qualityGates: [[threshold: 999, type: 'TOTAL', unstable: true]]
                 }
             }
