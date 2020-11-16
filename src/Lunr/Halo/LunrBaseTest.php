@@ -12,7 +12,6 @@
 namespace Lunr\Halo;
 
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use Throwable;
 use Closure;
 
@@ -36,7 +35,7 @@ abstract class LunrBaseTest extends TestCase
 
     /**
      * Reflection instance of the tested class.
-     * @var ReflectionClass
+     * @var \ReflectionClass
      */
     protected $reflection;
 
@@ -54,7 +53,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $method Method name
      *
-     * @return ReflectionMethod $return The ReflectionMethod instance
+     * @return \ReflectionMethod $return The ReflectionMethod instance
      */
     protected function get_accessible_reflection_method($method)
     {
@@ -83,7 +82,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $property Property name
      *
-     * @return ReflectionProperty $return The ReflectionProperty instance
+     * @return \ReflectionProperty $return The ReflectionProperty instance
      */
     protected function get_accessible_reflection_property($property)
     {
@@ -109,8 +108,8 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function.
      *
-     * @param string $name Function name
-     * @param string $mock Replacement code for the function
+     * @param string         $name Function name
+     * @param Closure|string $mock Replacement code for the function
      *
      * @return void
      */
@@ -122,8 +121,8 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function with uopz.
      *
-     * @param string          $name Function name
-     * @param string|callable $mock Replacement code for the function
+     * @param string         $name Function name
+     * @param Closure|string $mock Replacement code for the function
      *
      * @return void
      */
@@ -181,10 +180,10 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param callable $method     Method defined in an array form
-     * @param string   $mock       Replacement code for the method
-     * @param string   $visibility Visibility of the redefined method
-     * @param string   $args       Comma-delimited list of arguments for the redefined method
+     * @param callable       $method     Method defined in an array form
+     * @param Closure|string $mock       Replacement code for the method
+     * @param string         $visibility Visibility of the redefined method
+     * @param string         $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -199,9 +198,9 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param callable $method Method defined in an array form
-     * @param string   $mock   Replacement code for the method
-     * @param string   $args   Comma-delimited list of arguments for the redefined method
+     * @param callable       $method Method defined in an array form
+     * @param Closure|string $mock   Replacement code for the method
+     * @param string         $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */

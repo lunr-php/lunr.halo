@@ -34,7 +34,7 @@ class CallbackMock
     }
 
     /**
-     * A test function to be overridden by phpunit's mock funcitonality.
+     * A test function to be overridden by phpunit's mock functionality.
      *
      * @return void
      */
