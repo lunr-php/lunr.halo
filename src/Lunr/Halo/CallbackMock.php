@@ -38,7 +38,7 @@ class CallbackMock
      *
      * @return void
      */
-    public function test()
+    public function test(): void
     {
         // no-op
     }

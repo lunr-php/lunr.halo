@@ -20,7 +20,7 @@ trait PsrLoggerTestTrait
     /**
      * Test that the Logger class is passed correctly.
      */
-    public function testLoggerIsSetCorrectly()
+    public function testLoggerIsSetCorrectly(): void
     {
         $property = $this->get_reflection_property_value('logger');
 

@@ -19,9 +19,9 @@ class FluidInterfaceMock
 
     /**
      * Array of mocked return values
-     * @var array
+     * @var array<string, mixed>
      */
-    protected $return;
+    protected array $return;
 
     /**
      * Constructor.
@@ -42,12 +42,12 @@ class FluidInterfaceMock
     /**
      * Handle fluid interface calls.
      *
-     * @param string $name      Method name
-     * @param array  $arguments Method arguments
+     * @param string  $name      Method name
+     * @param mixed[] $arguments Method arguments
      *
      * @return mixed $return Stored return value or a self reference
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments)
     {
         if (array_key_exists($name, $this->return))
         {
@@ -67,7 +67,7 @@ class FluidInterfaceMock
      *
      * @return void
      */
-    public function mock($name, $value): void
+    public function mock(string $name, $value): void
     {
         if (!array_key_exists($name, $this->return))
         {

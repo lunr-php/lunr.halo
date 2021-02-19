@@ -56,7 +56,7 @@ class MockClass
      *
      * @return string String value
      */
-    public function constant()
+    public function constant(): string
     {
         return self::BARFOO;
     }
@@ -66,7 +66,7 @@ class MockClass
      *
      * @return string String value
      */
-    public function baz()
+    public function baz(): string
     {
         return 'string';
     }
@@ -78,7 +78,7 @@ class MockClass
      *
      * @return string String value
      */
-    public function baz2($string)
+    public function baz2(string $string): string
     {
         return $string;
     }

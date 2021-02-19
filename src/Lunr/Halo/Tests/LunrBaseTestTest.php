@@ -21,19 +21,6 @@ use ReflectionClass;
  */
 class LunrBaseTestTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of a mock class.
-     * @var MockClass
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the LunrBaseTest class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
-
     /**
      * Unit test constructor.
      */

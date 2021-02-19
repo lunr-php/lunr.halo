@@ -34,22 +34,6 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     }
 
     /**
-     * Test mock_function() with string
-     *
-     * @deprecated should be called with Closure
-     *
-     * @covers Lunr\Halo\LunrBaseTest::mock_function()
-     */
-    public function testMockFunctionWithString(): void
-    {
-        $this->mock_function('is_int', "return 'Nope!';");
-
-        $this->assertEquals('Nope!', is_int(1));
-
-        $this->unmock_function('is_int');
-    }
-
-    /**
      * Test unmock_function()
      *
      * @covers Lunr\Halo\LunrBaseTest::unmock_function()
@@ -72,31 +56,13 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testMockMethod(): void
     {
-        $this->mock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ], function (){ return 'Nope!'; });
-
         $class = new MockClass();
+
+        $this->mock_method([ $class, 'baz' ], function (){ return 'Nope!'; });
 
         $this->assertEquals('Nope!', $class->baz());
 
-        $this->unmock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ]);
-    }
-
-    /**
-     * Test mock_method()
-     *
-     * @deprecated should be called with Closure
-     *
-     * @covers Lunr\Halo\LunrBaseTest::mock_method()
-     */
-    public function testMockMethodWithString(): void
-    {
-        $this->mock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ], "return 'Nope!';");
-
-        $class = new MockClass();
-
-        $this->assertEquals('Nope!', $class->baz());
-
-        $this->unmock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ]);
+        $this->unmock_method([ $class, 'baz' ]);
     }
 
     /**
@@ -114,35 +80,19 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     }
 
     /**
-     * Test mock_method()
-     *
-     * @deprecated should be called with Closure
-     *
-     * @covers Lunr\Halo\LunrBaseTest::mock_method()
-     */
-    public function testMockMethodFromObjectWithString(): void
-    {
-        $this->mock_method([ $this->class, 'baz' ], "return 'Nope!';");
-
-        $this->assertEquals('Nope!', $this->class->baz());
-
-        $this->unmock_method([ $this->class, 'baz' ]);
-    }
-
-    /**
      * Test unmock_method()
      *
      * @covers Lunr\Halo\LunrBaseTest::unmock_method()
      */
     public function testUnmockMethod(): void
     {
-        $this->mock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ], function (){ return 'Nope!'; });
-
         $class = new MockClass();
+
+        $this->mock_method([ $class, 'baz' ], function (){ return 'Nope!'; });
 
         $this->assertEquals('Nope!', $class->baz());
 
-        $this->unmock_method([ '\Lunr\Halo\Tests\MockClass', 'baz' ]);
+        $this->unmock_method([ $class, 'baz' ]);
 
         $this->assertEquals('string', $class->baz());
     }

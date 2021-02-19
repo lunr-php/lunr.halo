@@ -12,8 +12,11 @@
 namespace Lunr\Halo;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
+use ReflectionProperty;
 use Throwable;
 use Closure;
+use ReflectionClass;
 
 /**
  * This class contains helper code for the Lunr unit tests.
@@ -25,7 +28,7 @@ abstract class LunrBaseTest extends TestCase
      * Identifier string for backup functions.
      * @var String
      */
-    const FUNCTION_ID = '_lunrbackup';
+    private const FUNCTION_ID = '_lunrbackup';
 
     /**
      * Instance of the tested class.
@@ -35,9 +38,9 @@ abstract class LunrBaseTest extends TestCase
 
     /**
      * Reflection instance of the tested class.
-     * @var \ReflectionClass
+     * @var ReflectionClass
      */
-    protected $reflection;
+    protected ReflectionClass $reflection;
 
     /**
      * Testcase Destructor.
@@ -53,9 +56,9 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $method Method name
      *
-     * @return \ReflectionMethod $return The ReflectionMethod instance
+     * @return ReflectionMethod $return The ReflectionMethod instance
      */
-    protected function get_accessible_reflection_method($method)
+    protected function get_accessible_reflection_method(string $method): ReflectionMethod
     {
         $return = $this->reflection->getMethod($method);
         $return->setAccessible(TRUE);
@@ -71,7 +74,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function set_reflection_property_value($property, $value)
+    protected function set_reflection_property_value(string $property, $value): void
     {
         $this->get_accessible_reflection_property($property)
              ->setValue($this->class, $value);
@@ -82,9 +85,9 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $property Property name
      *
-     * @return \ReflectionProperty $return The ReflectionProperty instance
+     * @return ReflectionProperty $return The ReflectionProperty instance
      */
-    protected function get_accessible_reflection_property($property)
+    protected function get_accessible_reflection_property(string $property): ReflectionProperty
     {
         $return = $this->reflection->getProperty($property);
         $return->setAccessible(TRUE);
@@ -99,7 +102,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return mixed $return Property value
      */
-    protected function get_reflection_property_value($property)
+    protected function get_reflection_property_value(string $property)
     {
         return $this->get_accessible_reflection_property($property)
                     ->getValue($this->class);
@@ -108,12 +111,12 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function.
      *
-     * @param string         $name Function name
-     * @param Closure|string $mock Replacement code for the function
+     * @param string  $name Function name
+     * @param Closure $mock Replacement code for the function
      *
      * @return void
      */
-    protected function mock_function($name, $mock)
+    protected function mock_function(string $name, Closure $mock): void
     {
         $this->uopz_mock_function($name, $mock);
     }
@@ -121,29 +124,20 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function with uopz.
      *
-     * @param string         $name Function name
-     * @param Closure|string $mock Replacement code for the function
+     * @param string  $name Function name
+     * @param Closure $mock Replacement code for the function
      *
      * @return void
      */
-    private function uopz_mock_function($name, $mock)
+    private function uopz_mock_function(string $name, Closure $mock): void
     {
         if (!extension_loaded('uopz'))
         {
             $this->markTestSkipped('The uopz extension is not available.');
-            return;
         }
 
-        if ($mock instanceof Closure)
-        {
-            uopz_set_return($name, $mock, TRUE);
-            return;
-        }
-
-        uopz_set_return($name, function () use ($mock)
-        {
-            return eval($mock);
-        }, TRUE);
+        uopz_set_return($name, $mock, TRUE);
+        return;
     }
 
     /**
@@ -153,7 +147,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function unmock_function($name)
+    protected function unmock_function(string $name): void
     {
         $this->uopz_unmock_function($name);
     }
@@ -165,11 +159,11 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    private function uopz_unmock_function($name)
+    private function uopz_unmock_function(string $name): void
     {
         if (!extension_loaded('uopz'))
         {
-            return;
+            $this->markTestSkipped('The uopz extension is not available.');
         }
 
         uopz_unset_return($name);
@@ -180,14 +174,14 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param callable       $method     Method defined in an array form
-     * @param Closure|string $mock       Replacement code for the method
-     * @param string         $visibility Visibility of the redefined method
-     * @param string         $args       Comma-delimited list of arguments for the redefined method
+     * @param callable $method     Method defined in an array form
+     * @param Closure  $mock       Replacement code for the method
+     * @param string   $visibility Visibility of the redefined method
+     * @param string   $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
-    protected function mock_method($method, $mock, $visibility = 'public', $args = '')
+    protected function mock_method(callable $method, Closure $mock, string $visibility = 'public', string $args = ''): void
     {
         //UOPZ does not support changing the visibility with the currently used function
         $this->uopz_mock_method($method, $mock, $args);
@@ -198,36 +192,24 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param callable       $method Method defined in an array form
-     * @param Closure|string $mock   Replacement code for the method
-     * @param string         $args   Comma-delimited list of arguments for the redefined method
+     * @param callable $method Method defined in an array form
+     * @param Closure  $mock   Replacement code for the method
+     * @param string   $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
-    private function uopz_mock_method($method, $mock, $args = '')
+    private function uopz_mock_method(callable $method, Closure $mock, string $args = ''): void
     {
         if (!extension_loaded('uopz'))
         {
             $this->markTestSkipped('The uopz extension is not available.');
-            return;
         }
 
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
-        if ($mock instanceof Closure)
-        {
-            uopz_set_return($class_name, $method_name, $mock, TRUE);
-            return;
-        }
-
-        $name = '_lambda_func_' . uniqid();
-
-        $callable = 'function ' . $name . '(' . $args . '){' . $mock . '}';
-
-        eval($callable);
-
-        uopz_set_return($class_name, $method_name, Closure::fromCallable($name), TRUE);
+        uopz_set_return($class_name, $method_name, $mock, TRUE);
+        return;
     }
 
     /**
@@ -237,7 +219,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function unmock_method($method)
+    protected function unmock_method(callable $method): void
     {
         $this->uopz_unmock_method($method);
     }
@@ -249,11 +231,11 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    private function uopz_unmock_method($method)
+    private function uopz_unmock_method(callable $method): void
     {
         if (!extension_loaded('uopz'))
         {
-            return;
+            $this->markTestSkipped('The uopz extension is not available.');
         }
 
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
@@ -265,19 +247,16 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Redefine a constant with uopz
      *
-     * TODO: Figure out why this won't work
-     *
      * @param string $constant The constant
      * @param mixed  $value    New value
      *
      * @return void
      */
-    protected function constant_redefine($constant, $value)
+    protected function constant_redefine(string $constant, $value): void
     {
         if (!extension_loaded('uopz'))
         {
             $this->markTestSkipped('The uopz extension is not available.');
-            return;
         }
 
         $constant = explode('::', $constant);
@@ -299,12 +278,11 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function constant_undefine($constant)
+    protected function constant_undefine(string $constant): void
     {
         if (!extension_loaded('uopz'))
         {
             $this->markTestSkipped('The uopz extension is not available.');
-            return;
         }
 
         $constant = explode('::', $constant);
@@ -327,7 +305,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function assertPropertyEquals($property, $expected)
+    protected function assertPropertyEquals(string $property, $expected): void
     {
         $property = $this->get_accessible_reflection_property($property);
         $this->assertEquals($expected, $property->getValue($this->class));
@@ -341,7 +319,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function assertPropertySame($property, $expected)
+    protected function assertPropertySame(string $property, $expected): void
     {
         $property = $this->get_accessible_reflection_property($property);
         $this->assertSame($expected, $property->getValue($this->class));
@@ -354,7 +332,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function assertPropertyEmpty($property)
+    protected function assertPropertyEmpty(string $property): void
     {
         $property = $this->get_accessible_reflection_property($property);
         $this->assertEmpty($property->getValue($this->class));
@@ -367,7 +345,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function assertPropertyUnset($name)
+    protected function assertPropertyUnset(string $name): void
     {
         $this->assertTrue(property_exists($this->class, $name));
 
@@ -405,7 +383,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function assertArrayEmpty($value)
+    protected function assertArrayEmpty($value): void
     {
         $this->assertIsArray($value);
         $this->assertEmpty($value);
@@ -418,7 +396,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function assertArrayNotEmpty($value)
+    protected function assertArrayNotEmpty($value): void
     {
         $this->assertIsArray($value);
         $this->assertNotEmpty($value);
@@ -431,7 +409,7 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    protected function expectOutputMatchesFile($file)
+    protected function expectOutputMatchesFile(string $file): void
     {
         $this->expectOutputString(file_get_contents($file));
     }
