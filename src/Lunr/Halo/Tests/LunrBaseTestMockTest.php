@@ -80,6 +80,20 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     }
 
     /**
+     * Test mock_method()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::mock_method()
+     */
+    public function testMockMethodFromParent(): void
+    {
+        $this->mock_method([ $this->child_class, 'baz' ], function (){ return 'Nope!'; });
+
+        $this->assertEquals('Nope!', $this->class->baz());
+
+        $this->unmock_method([ $this->child_class, 'baz' ]);
+    }
+
+    /**
      * Test unmock_method()
      *
      * @covers Lunr\Halo\LunrBaseTest::unmock_method()
@@ -114,6 +128,27 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
         $this->assertEquals('Nope!', $this->class->baz());
 
         $this->unmock_method([ $this->class, 'baz' ]);
+
+        $this->assertEquals('string', $this->class->baz());
+    }
+
+    /**
+     * Test unmock_method()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::unmock_method()
+     */
+    public function testUnmockMethodFromParent(): void
+    {
+        if (phpversion('uopz')[0] < 6)
+        {
+            $this->markTestSkipped('This functionality requires uopz >= 6.0.x to work correctly');
+        }
+
+        $this->mock_method([ $this->child_class, 'baz' ], function (){ return 'Nope!'; });
+
+        $this->assertEquals('Nope!', $this->class->baz());
+
+        $this->unmock_method([ $this->child_class, 'baz' ]);
 
         $this->assertEquals('string', $this->class->baz());
     }

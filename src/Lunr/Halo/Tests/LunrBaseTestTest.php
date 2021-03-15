@@ -21,11 +21,20 @@ use ReflectionClass;
  */
 class LunrBaseTestTest extends LunrBaseTest
 {
+
+    /**
+     * Instance of a child class.
+     * @var MockChildClass
+     */
+    protected $child_class;
+
     /**
      * Unit test constructor.
      */
     public function setUp(): void
     {
+        $this->child_class = new MockChildClass();
+
         $this->class      = new MockClass();
         $this->reflection = new ReflectionClass('Lunr\Halo\Tests\MockClass');
     }
@@ -35,6 +44,7 @@ class LunrBaseTestTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
+        unset($this->child_class);
         unset($this->class);
         unset($this->reflection);
     }

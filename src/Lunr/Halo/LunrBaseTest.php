@@ -17,6 +17,7 @@ use ReflectionProperty;
 use Throwable;
 use Closure;
 use ReflectionClass;
+use RuntimeException;
 
 /**
  * This class contains helper code for the Lunr unit tests.
@@ -37,6 +38,12 @@ abstract class LunrBaseTest extends TestCase
     protected $class;
 
     /**
+     * Array of mock class remaps for uopz.
+     * @var array
+     */
+    protected array $mock_remap = [];
+
+    /**
      * Reflection instance of the tested class.
      * @var ReflectionClass
      */
@@ -47,6 +54,7 @@ abstract class LunrBaseTest extends TestCase
      */
     public function tearDown(): void
     {
+        unset($this->mock_remap);
         unset($this->class);
         unset($this->reflection);
     }
@@ -208,7 +216,25 @@ abstract class LunrBaseTest extends TestCase
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
-        uopz_set_return($class_name, $method_name, $mock, TRUE);
+        try
+        {
+            uopz_set_return($class_name, $method_name, $mock, TRUE);
+        }
+        catch (RuntimeException $e)
+        {
+            $pos = strpos($e->getMessage(), 'the method is defined in');
+
+            if ($pos === FALSE)
+            {
+                throw $e;
+            }
+
+            $parent_class_name = substr($e->getMessage(), $pos + 25);
+
+            uopz_set_return($parent_class_name, $method_name, $mock, TRUE);
+
+            $this->mock_remap[$class_name][$method_name] = $parent_class_name;
+        }
         return;
     }
 
@@ -241,7 +267,14 @@ abstract class LunrBaseTest extends TestCase
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
-        uopz_unset_return($class_name, $method_name);
+        if (array_key_exists($class_name, $this->mock_remap) && array_key_exists($method_name, $this->mock_remap[$class_name]))
+        {
+            uopz_unset_return($this->mock_remap[$class_name][$method_name], $method_name);
+        }
+        else
+        {
+            uopz_unset_return($class_name, $method_name);
+        }
     }
 
     /**
