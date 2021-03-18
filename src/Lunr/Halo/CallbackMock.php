@@ -36,9 +36,9 @@ class CallbackMock
     /**
      * A test function to be overridden by phpunit's mock functionality.
      *
-     * @return void
+     * @return mixed|void
      */
-    public function test(): void
+    public function test()
     {
         // no-op
     }
