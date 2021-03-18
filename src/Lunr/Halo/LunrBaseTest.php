@@ -404,6 +404,11 @@ abstract class LunrBaseTest extends TestCase
             }
             else
             {
+                if (method_exists($property, 'hasType') && $property->hasType()) {
+                    $this->assertStringContainsString("Typed property {$property->class}::\${$name} must not be accessed before initialization", $message);
+                    return;
+                }
+
                 $this->assertStringContainsString('Cannot access', $message);
             }
         }
