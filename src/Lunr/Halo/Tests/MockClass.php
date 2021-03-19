@@ -21,7 +21,7 @@ class MockClass
      * A constant.
      * @var string
      */
-    const FOOBAR = 'constant';
+    public const FOOBAR = 'constant';
 
     /**
      * Another constant.

@@ -235,6 +235,7 @@ abstract class LunrBaseTest extends TestCase
 
             $this->mock_remap[$class_name][$method_name] = $parent_class_name;
         }
+
         return;
     }
 
@@ -399,13 +400,15 @@ abstract class LunrBaseTest extends TestCase
 
             if ($e instanceof \PHPUnit\Framework\Error\Notice)
             {
-                $this->assertStringContainsString("Undefined property", $message);
+                $this->assertStringContainsString('Undefined property', $message);
                 $this->assertStringContainsString("::\$$name", $message);
             }
             else
             {
-                if (method_exists($property, 'hasType') && $property->hasType()) {
-                    $this->assertStringContainsString("Typed property {$property->class}::\${$name} must not be accessed before initialization", $message);
+                if (method_exists($property, 'hasType') && $property->hasType())
+                {
+                    $needle = "Typed property {$property->class}::\${$name} must not be accessed before initialization";
+                    $this->assertStringContainsString($needle, $message);
                     return;
                 }
 
