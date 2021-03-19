@@ -1,0 +1,54 @@
+name: PHP Tests
+on: [push, pull_request]
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    name: "PHP-${{ matrix.php-versions }}: CS/PHPStan/PHPUnit"
+    strategy:
+      matrix:
+        php-versions: ['7.4']
+        experimental: [false]
+        include:
+          - php-versions: 8.0
+            experimental: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Codestyle checkout
+        uses: actions/checkout@v2
+        with:
+            repository: 'M2Mobi/lunr-coding-standard'
+
+            # Relative path under $GITHUB_WORKSPACE to place the repository
+            path: 'codestyle'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: cs2pr, phpcs, phpstan, phpunit
+          extensions: uopz
+
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+
+      - name: Run PHPCS
+        run: phpcs -q --report=checkstyle src --standard=$GITHUB_WORKSPACE/codestyle/Lunr | cs2pr
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHPStan
+        run: phpstan analyse src -l6 --configuration tests/phpstan.neon.dist
+
+      - name: Run PHPunit
+        run: phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
+
+      - name: Collect code coverage
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage.xml
+
