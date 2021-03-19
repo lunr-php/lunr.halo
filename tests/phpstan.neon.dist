@@ -1,4 +1,5 @@
 parameters:
+    checkGenericClassInNonGenericObjectType: false
     bootstrapFiles:
         - ../decomposer.autoload.inc.php
     excludes_analyse:

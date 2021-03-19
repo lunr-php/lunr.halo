@@ -26,12 +26,6 @@ abstract class LunrBaseTest extends TestCase
 {
 
     /**
-     * Identifier string for backup functions.
-     * @var String
-     */
-    private const FUNCTION_ID = '_lunrbackup';
-
-    /**
      * Instance of the tested class.
      * @var mixed
      */
@@ -39,7 +33,7 @@ abstract class LunrBaseTest extends TestCase
 
     /**
      * Array of mock class remaps for uopz.
-     * @var array
+     * @var array<string, array<string, string>>
      */
     protected array $mock_remap = [];
 
@@ -235,8 +229,6 @@ abstract class LunrBaseTest extends TestCase
 
             $this->mock_remap[$class_name][$method_name] = $parent_class_name;
         }
-
-        return;
     }
 
     /**
@@ -405,7 +397,7 @@ abstract class LunrBaseTest extends TestCase
             }
             else
             {
-                if (method_exists($property, 'hasType') && $property->hasType())
+                if (isset($property) && method_exists($property, 'hasType') && $property->hasType())
                 {
                     $needle = "Typed property {$property->class}::\${$name} must not be accessed before initialization";
                     $this->assertStringContainsString($needle, $message);
@@ -452,7 +444,13 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function expectOutputMatchesFile(string $file): void
     {
-        $this->expectOutputString(file_get_contents($file));
+        $content = file_get_contents($file);
+        if ($content === FALSE)
+        {
+            throw new \RuntimeException("File \"$file\" could not be read!");
+        }
+
+        $this->expectOutputString($content);
     }
 
 }
