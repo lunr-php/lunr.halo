@@ -110,7 +110,7 @@ pipeline {
                 withSonarQubeEnv('M2mobi') {
                     sh """sonar-scanner \\
                             -Dsonar.projectKey=php:${currentBuild.rawBuild.project.parent.displayName.toLowerCase()} \\
-                            -Dsonar.projectName=Lunr.Vortex \\
+                            -Dsonar.projectName=Lunr.Halo \\
                             -Dsonar.sources=src/ \\
                             -Dsonar.php.tests.reportPath=build/logs/junit.xml \\
                             -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"""
