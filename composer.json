@@ -7,7 +7,7 @@
   "license": "MIT",
   "require": {
     "psr/log": "~1.1",
-    "php": "~7.2",
+    "php": "~7.2||~8.0",
     "ext-uopz": ">=6.1"
   },
   "require-dev": {

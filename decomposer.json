@@ -9,7 +9,7 @@
     },
     "PHPUnit": {
         "url": "https://github.com/sebastianbergmann/phpunit.git",
-        "version": "7.5.20",
+        "version": "8.5.15",
         "psr4": {
             "prefix": "PHPUnit",
             "search-path": "/src/"
