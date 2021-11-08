@@ -176,14 +176,14 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param callable $method     Method defined in an array form
-     * @param Closure  $mock       Replacement code for the method
-     * @param string   $visibility Visibility of the redefined method
-     * @param string   $args       Comma-delimited list of arguments for the redefined method
+     * @param array   $method     Method defined in an array form
+     * @param Closure $mock       Replacement code for the method
+     * @param string  $visibility Visibility of the redefined method
+     * @param string  $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
-    protected function mock_method(callable $method, Closure $mock, string $visibility = 'public', string $args = ''): void
+    protected function mock_method(array $method, Closure $mock, string $visibility = 'public', string $args = ''): void
     {
         //UOPZ does not support changing the visibility with the currently used function
         $this->uopz_mock_method($method, $mock, $args);
@@ -194,13 +194,13 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param callable $method Method defined in an array form
-     * @param Closure  $mock   Replacement code for the method
-     * @param string   $args   Comma-delimited list of arguments for the redefined method
+     * @param array   $method Method defined in an array form
+     * @param Closure $mock   Replacement code for the method
+     * @param string  $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
-    private function uopz_mock_method(callable $method, Closure $mock, string $args = ''): void
+    private function uopz_mock_method(array $method, Closure $mock, string $args = ''): void
     {
         if (!extension_loaded('uopz'))
         {
@@ -234,11 +234,11 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method.
      *
-     * @param callable $method Method defined in an array form
+     * @param array $method Method defined in an array form
      *
      * @return void
      */
-    protected function unmock_method(callable $method): void
+    protected function unmock_method(array $method): void
     {
         $this->uopz_unmock_method($method);
     }
@@ -246,11 +246,11 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method with uopz.
      *
-     * @param callable $method Method defined in an array form
+     * @param array $method Method defined in an array form
      *
      * @return void
      */
-    private function uopz_unmock_method(callable $method): void
+    private function uopz_unmock_method(array $method): void
     {
         if (!extension_loaded('uopz'))
         {
