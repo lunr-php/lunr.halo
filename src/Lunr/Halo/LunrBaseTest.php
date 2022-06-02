@@ -176,10 +176,10 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array   $method     Method defined in an array form
-     * @param Closure $mock       Replacement code for the method
-     * @param string  $visibility Visibility of the redefined method
-     * @param string  $args       Comma-delimited list of arguments for the redefined method
+     * @param array<int,object|string> $method     Method defined in an array form
+     * @param Closure                  $mock       Replacement code for the method
+     * @param string                   $visibility Visibility of the redefined method
+     * @param string                   $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -194,9 +194,9 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array   $method Method defined in an array form
-     * @param Closure $mock   Replacement code for the method
-     * @param string  $args   Comma-delimited list of arguments for the redefined method
+     * @param array<int,object|string> $method Method defined in an array form
+     * @param Closure                  $mock   Replacement code for the method
+     * @param string                   $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -234,7 +234,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method.
      *
-     * @param array $method Method defined in an array form
+     * @param array<int,object|string> $method Method defined in an array form
      *
      * @return void
      */
@@ -246,7 +246,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method with uopz.
      *
-     * @param array $method Method defined in an array form
+     * @param array<int,object|string> $method Method defined in an array form
      *
      * @return void
      */
