@@ -2,5 +2,5 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     bootstrapFiles:
         - test.bootstrap.inc.php
-    excludes_analyse:
+    excludePaths:
         - ../src/*/Tests/*
