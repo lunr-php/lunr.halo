@@ -375,38 +375,9 @@ abstract class LunrBaseTest extends TestCase
     {
         $this->assertTrue(property_exists($this->class, $name));
 
-        try
-        {
-            $property = $this->get_accessible_reflection_property($name);
+        $property = $this->get_accessible_reflection_property($name);
 
-            $this->assertNull($property->getValue($this->class));
-        }
-        catch (Throwable $e)
-        {
-            $message = $e->getMessage();
-
-            if (strpos($message, 'Failed asserting that') !== FALSE)
-            {
-                throw $e;
-            }
-
-            if ($e instanceof \PHPUnit\Framework\Error\Notice)
-            {
-                $this->assertStringContainsString('Undefined property', $message);
-                $this->assertStringContainsString("::\$$name", $message);
-            }
-            else
-            {
-                if (isset($property) && method_exists($property, 'hasType') && $property->hasType())
-                {
-                    $needle = "Typed property {$property->class}::\${$name} must not be accessed before initialization";
-                    $this->assertStringContainsString($needle, $message);
-                    return;
-                }
-
-                $this->assertStringContainsString('Cannot access', $message);
-            }
-        }
+        $this->assertFalse($property->isInitialized($this->class));
     }
 
     /**
