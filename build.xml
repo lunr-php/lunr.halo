@@ -112,6 +112,7 @@
             <arg value="2" />
             <arg value="--no-progress" />
             <arg value="--no-interaction" />
+            <arg value="--xdebug" />
         </exec>
     </target>
 
@@ -128,6 +129,7 @@
             <arg value="checkstyle" />
             <arg value="--no-progress" />
             <arg value="--no-interaction" />
+            <arg value="--xdebug" />
         </exec>
     </target>
 
