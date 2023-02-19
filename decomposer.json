@@ -7,6 +7,14 @@
             "search-path": "/Psr/Log/"
         }
     },
+    "Psr-Container": {
+        "url": "https://github.com/php-fig/container.git",
+        "version": "2.0.2",
+        "psr4": {
+            "prefix": "Psr\\Container",
+            "search-path": "/src/"
+        }
+    },
     "PHPUnit": {
         "url": "https://github.com/sebastianbergmann/phpunit.git",
         "version": "9.5.28",
