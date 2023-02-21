@@ -1,0 +1,24 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Lunr.Halo
+Upstream-Contact: Heinz Wiesinger <pprkut@liwjatan.org>
+Source: https://github.com/lunr-php/lunr.halo
+
+Files: .git_commit_template
+Copyright: 2011 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: composer.json
+Copyright: 2017 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: decomposer.json
+Copyright: 2017 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: README.md
+Copyright: 2018 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
