@@ -1,5 +1,5 @@
 # Lunr.Halo
-[![build status](https://api.travis-ci.org/M2Mobi/lunr.halo.svg)](https://travis-ci.org/M2Mobi/lunr.halo) [![codecov](https://codecov.io/gh/M2Mobi/lunr.halo/branch/master/graph/badge.svg)](https://codecov.io/gh/M2Mobi/lunr.halo)
+[![build status](https://api.travis-ci.org/lunr-php/lunr.halo.svg)](https://travis-ci.org/lunr-php/lunr.halo) [![codecov](https://codecov.io/gh/lunr-php/lunr.halo/branch/master/graph/badge.svg)](https://codecov.io/gh/lunr-php/lunr.halo)
 
 Lunr.Halo is a set of PHPUnit helper libraries.
 
@@ -32,12 +32,12 @@ If you encounter any issues when using Lunr.Halo you can report them [on github]
 About Us
 --------
 
-Lunr.Halo development is spearheaded by [M2mobi][1].
+Lunr.Halo development is spearheaded by [Move][1].
 
-  [1]: https://m2mobi.com
+  [1]: https://moveagency.com
   [2]: https://semver.org
   [3]: https://groups.google.com/forum/#!forum/lunr-users
   [4]: https://groups.google.com/forum/#!forum/lunr-developers
-  [5]: https://github.com/M2Mobi/lunr.halo
+  [5]: https://github.com/lunr-php/lunr.halo
   [6]: https://reviews.lunr.nl
-  [7]: https://github.com/M2Mobi/lunr.halo/issues
+  [7]: https://github.com/lunr-php/lunr.halo/issues

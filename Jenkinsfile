@@ -30,7 +30,7 @@ pipeline {
                         doGenerateSubmoduleConfigurations: false,
                         extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '../lunr-coding-standard']],
                         submoduleCfg: [],
-                        userRemoteConfigs: [[url: 'https://github.com/M2Mobi/lunr-coding-standard.git']]
+                        userRemoteConfigs: [[url: 'https://github.com/lunr-php/lunr-coding-standard.git']]
                     ]
                 checkout scm
             }
