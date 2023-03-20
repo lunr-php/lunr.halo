@@ -19,7 +19,7 @@ jobs:
             experimental: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -48,10 +48,10 @@ jobs:
     name: "PHPCS"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Codestyle checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
             repository: 'lunr-php/lunr-coding-standard'
 
@@ -73,7 +73,7 @@ jobs:
     name: "PHPStan"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHPStan
         uses: shivammathur/setup-php@v2
