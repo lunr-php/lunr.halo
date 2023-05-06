@@ -37,6 +37,36 @@ abstract class LunrBaseTest extends TestCase
     protected array $mock_remap = [];
 
     /**
+     * Array of output messages to expect.
+     * @var string[]
+     */
+    private array $output_strings = [];
+
+    /**
+     * Whether we have an error handler set for E_USER_NOTICE.
+     * @var bool
+     */
+    private bool $user_notice_handler_set = FALSE;
+
+    /**
+     * Whether we have an error handler set for E_USER_WARNING.
+     * @var bool
+     */
+    private bool $user_warning_handler_set = FALSE;
+
+    /**
+     * Whether we have an error handler set for E_USER_ERROR.
+     * @var bool
+     */
+    private bool $user_error_handler_set = FALSE;
+
+    /**
+     * Whether we have an error handler set for E_USER_DEPRECATED.
+     * @var bool
+     */
+    private bool $user_deprecated_handler_set = FALSE;
+
+    /**
      * Reflection instance of the tested class.
      * @var ReflectionClass
      */
@@ -47,6 +77,30 @@ abstract class LunrBaseTest extends TestCase
      */
     public function tearDown(): void
     {
+        if ($this->user_notice_handler_set)
+        {
+            restore_error_handler();
+            $this->user_notice_handler_set = FALSE;
+        }
+
+        if ($this->user_warning_handler_set)
+        {
+            restore_error_handler();
+            $this->user_warning_handler_set = FALSE;
+        }
+
+        if ($this->user_error_handler_set)
+        {
+            restore_error_handler();
+            $this->user_error_handler_set = FALSE;
+        }
+
+        if ($this->user_deprecated_handler_set)
+        {
+            restore_error_handler();
+            $this->user_deprecated_handler_set = FALSE;
+        }
+
         unset($this->mock_remap);
         unset($this->class);
         unset($this->reflection);
@@ -421,6 +475,123 @@ abstract class LunrBaseTest extends TestCase
         }
 
         $this->expectOutputString($content);
+    }
+
+    /**
+     * Expect an E_USER_NOTICE error.
+     *
+     * @param string $message The error message to expect
+     *
+     * @return void
+     */
+    public function expectUserNotice(string $message): void
+    {
+        if (!$this->user_notice_handler_set)
+        {
+            set_error_handler(
+                function ($errno, $errstr) {
+                    echo "NOTICE: $errstr\n";
+                },
+                E_USER_NOTICE,
+            );
+            $this->user_notice_handler_set = TRUE;
+        }
+
+        $this->output_strings[] = "NOTICE: $message\n";
+
+        parent::expectOutputString(implode("\n", $this->output_strings));
+    }
+
+    /**
+     * Expect an E_USER_WARNING error.
+     *
+     * @param string $message The error message to expect
+     *
+     * @return void
+     */
+    public function expectUserWarning(string $message): void
+    {
+        if (!$this->user_warning_handler_set)
+        {
+            set_error_handler(
+                function ($errno, $errstr) {
+                    echo "WARNING: $errstr\n";
+                },
+                E_USER_WARNING,
+            );
+            $this->user_warning_handler_set = TRUE;
+         }
+
+        $this->output_strings[] = "WARNING: $message\n";
+
+        parent::expectOutputString(implode("\n", $this->output_strings));
+    }
+
+    /**
+     * Expect an E_USER_ERROR error.
+     *
+     * @param string $message The error message to expect
+     *
+     * @return void
+     */
+    public function expectUserError(string $message): void
+    {
+        if (!$this->user_error_handler_set)
+        {
+            set_error_handler(
+                function ($errno, $errstr) {
+                    echo "ERROR: $errstr\n";
+                },
+                E_USER_ERROR,
+            );
+            $this->user_error_handler_set = TRUE;
+         }
+
+        $this->output_strings[] = "ERROR: $message\n";
+
+        parent::expectOutputString(implode("\n", $this->output_strings));
+    }
+
+    /**
+     * Expect an E_USER_DEPRECATED error.
+     *
+     * @param string $message The error message to expect
+     *
+     * @return void
+     */
+    public function expectUserDeprecated(string $message): void
+    {
+        if (!$this->user_deprecated_handler_set)
+        {
+            set_error_handler(
+                function ($errno, $errstr) {
+                    echo "DEPRECATED: $errstr\n";
+                },
+                E_USER_DEPRECATED,
+            );
+            $this->user_deprecated_handler_set = TRUE;
+        }
+
+        $this->output_strings[] = "DEPRECATED: $message\n";
+
+        parent::expectOutputString(implode("\n", $this->output_strings));
+    }
+
+    /**
+     * Expect an output string.
+     *
+     * Override the parent method so it plays well together with the user
+     * error handlers.
+     *
+     * @param string $expectedString The output string to expect
+     *
+     * @return void
+     */
+    public function expectOutputString(string $expectedString): void
+    {
+        $this->output_strings[] = $expectedString;
+
+        parent::expectOutputString(implode("\n", $this->output_strings));
     }
 
 }
