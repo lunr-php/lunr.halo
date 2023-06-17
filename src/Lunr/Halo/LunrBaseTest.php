@@ -520,7 +520,7 @@ abstract class LunrBaseTest extends TestCase
                 E_USER_WARNING,
             );
             $this->user_warning_handler_set = TRUE;
-         }
+        }
 
         $this->output_strings[] = "WARNING: $message\n";
 
@@ -545,7 +545,7 @@ abstract class LunrBaseTest extends TestCase
                 E_USER_ERROR,
             );
             $this->user_error_handler_set = TRUE;
-         }
+        }
 
         $this->output_strings[] = "ERROR: $message\n";
 
