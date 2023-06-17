@@ -499,7 +499,7 @@ abstract class LunrBaseTest extends TestCase
 
         $this->output_strings[] = "NOTICE: $message\n";
 
-        parent::expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->output_strings));
     }
 
     /**
@@ -524,7 +524,7 @@ abstract class LunrBaseTest extends TestCase
 
         $this->output_strings[] = "WARNING: $message\n";
 
-        parent::expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->output_strings));
     }
 
     /**
@@ -549,7 +549,7 @@ abstract class LunrBaseTest extends TestCase
 
         $this->output_strings[] = "ERROR: $message\n";
 
-        parent::expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->output_strings));
     }
 
     /**
@@ -574,7 +574,7 @@ abstract class LunrBaseTest extends TestCase
 
         $this->output_strings[] = "DEPRECATED: $message\n";
 
-        parent::expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->output_strings));
     }
 
     /**
@@ -587,11 +587,11 @@ abstract class LunrBaseTest extends TestCase
      *
      * @return void
      */
-    public function expectOutputString(string $expectedString): void
+    public function expectCustomOutputString(string $expectedString): void
     {
         $this->output_strings[] = $expectedString;
 
-        parent::expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->output_strings));
     }
 
 }
