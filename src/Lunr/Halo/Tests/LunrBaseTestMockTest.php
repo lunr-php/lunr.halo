@@ -25,7 +25,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testMockFunction(): void
     {
-        $this->mock_function('is_int', function (){ return 'Nope!'; });
+        $this->mock_function('is_int', function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', is_int(1));
 
@@ -39,7 +39,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testUnmockFunction(): void
     {
-        $this->mock_function('is_int', function (){ return 'Nope!'; });
+        $this->mock_function('is_int', function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', is_int(1));
 
@@ -57,7 +57,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     {
         $class = new MockClass();
 
-        $this->mock_method([ $class, 'baz' ], function (){ return 'Nope!'; });
+        $this->mock_method([ $class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $class->baz());
 
@@ -71,7 +71,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testMockMethodFromObject(): void
     {
-        $this->mock_method([ $this->class, 'baz' ], function (){ return 'Nope!'; });
+        $this->mock_method([ $this->class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
@@ -85,7 +85,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testMockMethodFromParent(): void
     {
-        $this->mock_method([ $this->child_class, 'baz' ], function (){ return 'Nope!'; });
+        $this->mock_method([ $this->child_class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
@@ -101,7 +101,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     {
         $class = new MockClass();
 
-        $this->mock_method([ $class, 'baz' ], function (){ return 'Nope!'; });
+        $this->mock_method([ $class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $class->baz());
 
@@ -122,7 +122,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
             $this->markTestSkipped('This functionality requires uopz >= 6.0.x to work correctly');
         }
 
-        $this->mock_method([ $this->class, 'baz' ], function (){ return 'Nope!'; });
+        $this->mock_method([ $this->class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
@@ -143,7 +143,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
             $this->markTestSkipped('This functionality requires uopz >= 6.0.x to work correctly');
         }
 
-        $this->mock_method([ $this->child_class, 'baz' ], function (){ return 'Nope!'; });
+        $this->mock_method([ $this->child_class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
