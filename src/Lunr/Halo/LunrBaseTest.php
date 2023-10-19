@@ -111,14 +111,11 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $method Method name
      *
-     * @return ReflectionMethod $return The ReflectionMethod instance
+     * @return ReflectionMethod The ReflectionMethod instance
      */
     protected function get_accessible_reflection_method(string $method): ReflectionMethod
     {
-        $return = $this->reflection->getMethod($method);
-        $return->setAccessible(TRUE);
-
-        return $return;
+        return $this->reflection->getMethod($method);
     }
 
     /**
@@ -140,14 +137,11 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $property Property name
      *
-     * @return ReflectionProperty $return The ReflectionProperty instance
+     * @return ReflectionProperty The ReflectionProperty instance
      */
     protected function get_accessible_reflection_property(string $property): ReflectionProperty
     {
-        $return = $this->reflection->getProperty($property);
-        $return->setAccessible(TRUE);
-
-        return $return;
+        return $this->reflection->getProperty($property);
     }
 
     /**
@@ -155,9 +149,9 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $property Property name
      *
-     * @return mixed $return Property value
+     * @return mixed Property value
      */
-    protected function get_reflection_property_value(string $property)
+    protected function get_reflection_property_value(string $property): mixed
     {
         return $this->get_accessible_reflection_property($property)
                     ->getValue($this->class);
@@ -386,8 +380,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function assertPropertyEquals(string $property, $expected): void
     {
-        $property = $this->get_accessible_reflection_property($property);
-        $this->assertEquals($expected, $property->getValue($this->class));
+        $this->assertEquals($expected, $this->get_reflection_property_value($property));
     }
 
     /**
@@ -400,8 +393,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function assertPropertySame(string $property, $expected): void
     {
-        $property = $this->get_accessible_reflection_property($property);
-        $this->assertSame($expected, $property->getValue($this->class));
+        $this->assertSame($expected, $this->get_reflection_property_value($property));
     }
 
     /**
@@ -413,8 +405,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function assertPropertyEmpty(string $property): void
     {
-        $property = $this->get_accessible_reflection_property($property);
-        $this->assertEmpty($property->getValue($this->class));
+        $this->assertEmpty($this->get_reflection_property_value($property));
     }
 
     /**
