@@ -479,8 +479,9 @@ abstract class LunrBaseTest extends TestCase
         if (!$this->user_notice_handler_set)
         {
             set_error_handler(
-                function ($errno, $errstr) {
+                function (int $errno, string $errstr): bool {
                     echo "NOTICE: $errstr\n";
+                    return TRUE;
                 },
                 E_USER_NOTICE,
             );
@@ -504,8 +505,9 @@ abstract class LunrBaseTest extends TestCase
         if (!$this->user_warning_handler_set)
         {
             set_error_handler(
-                function ($errno, $errstr) {
+                function (int $errno, string $errstr): bool {
                     echo "WARNING: $errstr\n";
+                    return TRUE;
                 },
                 E_USER_WARNING,
             );
@@ -529,8 +531,9 @@ abstract class LunrBaseTest extends TestCase
         if (!$this->user_error_handler_set)
         {
             set_error_handler(
-                function ($errno, $errstr) {
+                function (int $errno, string $errstr): bool {
                     echo "ERROR: $errstr\n";
+                    return TRUE;
                 },
                 E_USER_ERROR,
             );
@@ -554,8 +557,9 @@ abstract class LunrBaseTest extends TestCase
         if (!$this->user_deprecated_handler_set)
         {
             set_error_handler(
-                function ($errno, $errstr) {
+                function (int $errno, string $errstr): bool {
                     echo "DEPRECATED: $errstr\n";
+                    return TRUE;
                 },
                 E_USER_DEPRECATED,
             );
