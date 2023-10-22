@@ -10,6 +10,9 @@
 
 namespace Lunr\Halo\Tests;
 
+use ReflectionMethod;
+use ReflectionProperty;
+
 /**
  * This class contains the tests for the unit test base class.
  *
@@ -27,7 +30,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     {
         $method = $this->get_accessible_reflection_method('baz');
 
-        $this->assertInstanceOf('ReflectionMethod', $method);
+        $this->assertInstanceOf(ReflectionMethod::class, $method);
         $this->assertEquals('baz', $method->name);
     }
 
@@ -40,7 +43,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     {
         $property = $this->get_accessible_reflection_property('foo');
 
-        $this->assertInstanceOf('ReflectionProperty', $property);
+        $this->assertInstanceOf(ReflectionProperty::class, $property);
         $this->assertEquals('foo', $property->name);
     }
 

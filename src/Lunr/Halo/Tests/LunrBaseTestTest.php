@@ -25,7 +25,7 @@ class LunrBaseTestTest extends LunrBaseTest
      * Instance of a child class.
      * @var MockChildClass
      */
-    protected $child_class;
+    protected MockChildClass $child_class;
 
     /**
      * Unit test constructor.
@@ -35,7 +35,7 @@ class LunrBaseTestTest extends LunrBaseTest
         $this->child_class = new MockChildClass();
 
         $this->class      = new MockClass();
-        $this->reflection = new ReflectionClass('Lunr\Halo\Tests\MockClass');
+        $this->reflection = new ReflectionClass(MockClass::class);
     }
 
     /**

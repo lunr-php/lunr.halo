@@ -32,7 +32,7 @@ class MockClass
      * Protected property.
      * @var string
      */
-    protected $foo;
+    protected string $foo;
 
     /**
      * Constructor.
