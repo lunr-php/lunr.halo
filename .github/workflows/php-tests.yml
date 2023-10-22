@@ -71,7 +71,7 @@ jobs:
 
   phpstan:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: false
     name: "PHPStan"
     steps:
       - name: Checkout
