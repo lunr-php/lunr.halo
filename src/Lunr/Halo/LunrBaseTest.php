@@ -111,9 +111,23 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $method Method name
      *
+     * @deprecated Use get_reflection_method() instead
+     *
      * @return ReflectionMethod The ReflectionMethod instance
      */
     protected function get_accessible_reflection_method(string $method): ReflectionMethod
+    {
+        return $this->get_reflection_method($method);
+    }
+
+    /**
+     * Get a ReflectionMethod.
+     *
+     * @param string $method Method name
+     *
+     * @return ReflectionMethod The ReflectionMethod instance
+     */
+    protected function get_reflection_method(string $method): ReflectionMethod
     {
         return $this->reflection->getMethod($method);
     }
@@ -128,7 +142,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function set_reflection_property_value(string $property, $value): void
     {
-        $this->get_accessible_reflection_property($property)
+        $this->get_reflection_property($property)
              ->setValue($this->class, $value);
     }
 
@@ -137,9 +151,23 @@ abstract class LunrBaseTest extends TestCase
      *
      * @param string $property Property name
      *
+     * @deprecated Use get_reflection_property() instead
+     *
      * @return ReflectionProperty The ReflectionProperty instance
      */
     protected function get_accessible_reflection_property(string $property): ReflectionProperty
+    {
+        return $this->get_reflection_property($property);
+    }
+
+    /**
+     * Get a ReflectionProperty.
+     *
+     * @param string $property Property name
+     *
+     * @return ReflectionProperty The ReflectionProperty instance
+     */
+    protected function get_reflection_property(string $property): ReflectionProperty
     {
         return $this->reflection->getProperty($property);
     }
@@ -153,7 +181,7 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function get_reflection_property_value(string $property): mixed
     {
-        return $this->get_accessible_reflection_property($property)
+        return $this->get_reflection_property($property)
                     ->getValue($this->class);
     }
 
@@ -418,7 +446,7 @@ abstract class LunrBaseTest extends TestCase
     {
         $this->assertTrue(property_exists($this->class, $name));
 
-        $property = $this->get_accessible_reflection_property($name);
+        $property = $this->get_reflection_property($name);
 
         $this->assertFalse($property->isInitialized($this->class));
     }

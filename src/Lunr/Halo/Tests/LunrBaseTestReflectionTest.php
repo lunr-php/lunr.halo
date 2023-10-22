@@ -35,6 +35,19 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     }
 
     /**
+     * Test get_reflection_method()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::get_reflection_method
+     */
+    public function testGetReflectionMethod(): void
+    {
+        $method = $this->get_reflection_method('baz');
+
+        $this->assertInstanceOf(ReflectionMethod::class, $method);
+        $this->assertEquals('baz', $method->name);
+    }
+
+    /**
      * Test get_accessible_reflection_property()
      *
      * @covers Lunr\Halo\LunrBaseTest::get_accessible_reflection_property
@@ -42,6 +55,19 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     public function testGetAccessibleReflectionProperty(): void
     {
         $property = $this->get_accessible_reflection_property('foo');
+
+        $this->assertInstanceOf(ReflectionProperty::class, $property);
+        $this->assertEquals('foo', $property->name);
+    }
+
+    /**
+     * Test get_reflection_property()
+     *
+     * @covers Lunr\Halo\LunrBaseTest::get_reflection_property
+     */
+    public function testGetReflectionProperty(): void
+    {
+        $property = $this->get_reflection_property('foo');
 
         $this->assertInstanceOf(ReflectionProperty::class, $property);
         $this->assertEquals('foo', $property->name);
