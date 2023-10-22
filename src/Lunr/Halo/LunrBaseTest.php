@@ -186,7 +186,6 @@ abstract class LunrBaseTest extends TestCase
         }
 
         uopz_set_return($name, $mock, TRUE);
-        return;
     }
 
     /**
