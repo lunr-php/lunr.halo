@@ -26,9 +26,9 @@ abstract class LunrBaseTest extends TestCase
 
     /**
      * Instance of the tested class.
-     * @var mixed
+     * @var object
      */
-    protected $class;
+    private object $class;
 
     /**
      * Array of mock class remaps for uopz.
@@ -71,6 +71,19 @@ abstract class LunrBaseTest extends TestCase
      * @var ReflectionClass
      */
     protected ReflectionClass $reflection;
+
+    /**
+     * Testcase Constructor.
+     *
+     * @param object $class Instance of the tested class
+     *
+     * @return void
+     */
+    public function baseSetUp(object $class): void
+    {
+        $this->class      = $class;
+        $this->reflection = new ReflectionClass($class::class);
+    }
 
     /**
      * Testcase Destructor.

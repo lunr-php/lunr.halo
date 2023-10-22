@@ -22,6 +22,12 @@ class LunrBaseTestTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the tested class.
+     * @var MockClass
+     */
+    protected MockClass $class;
+
+    /**
      * Instance of a child class.
      * @var MockChildClass
      */
@@ -34,8 +40,9 @@ class LunrBaseTestTest extends LunrBaseTest
     {
         $this->child_class = new MockChildClass();
 
-        $this->class      = new MockClass();
-        $this->reflection = new ReflectionClass(MockClass::class);
+        $this->class = new MockClass();
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -43,9 +50,10 @@ class LunrBaseTestTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
+        parent::tearDown();
+
         unset($this->child_class);
         unset($this->class);
-        unset($this->reflection);
     }
 
 }
