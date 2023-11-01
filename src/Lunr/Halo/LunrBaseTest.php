@@ -10,6 +10,7 @@
 
 namespace Lunr\Halo;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -81,8 +82,16 @@ abstract class LunrBaseTest extends TestCase
      */
     public function baseSetUp(object $class): void
     {
-        $this->class      = $class;
-        $this->reflection = new ReflectionClass($class::class);
+        $this->class = $class;
+
+        if ($class instanceof MockObject)
+        {
+            $this->reflection = new ReflectionClass(get_parent_class($class));
+        }
+        else
+        {
+            $this->reflection = new ReflectionClass($class::class);
+        }
     }
 
     /**
