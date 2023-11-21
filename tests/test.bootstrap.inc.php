@@ -12,25 +12,28 @@
 
 $base = __DIR__ . '/..';
 
+// Define application config lookup path
+$paths = [
+    get_include_path(),
+    $base . '/src',
+];
+
 set_include_path(
-    $base . '/src:' .
-    $base . '/config:' .
-    $base . '/system:' .
-    $base . '/tests/statics:' .
-    $base . '/tests/statics/Core:' .
-    get_include_path()
+    implode(':', $paths)
 );
 
 if (file_exists($base . '/vendor/autoload.php') == TRUE)
 {
     // Load composer autoloader.
-    require_once $base . '/vendor/autoload.php';
+    $autoload_file = $base . '/vendor/autoload.php';
 }
 else
 {
     // Load decomposer autoloader.
-    require_once $base . '/decomposer.autoload.inc.php';
+    $autoload_file = $base . '/decomposer.autoload.inc.php';
 }
+
+require_once $autoload_file;
 
 if (defined('TEST_STATICS') === FALSE)
 {
