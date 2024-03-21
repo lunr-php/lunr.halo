@@ -117,11 +117,6 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testUnmockMethodFromObject(): void
     {
-        if (phpversion('uopz')[0] < 6)
-        {
-            $this->markTestSkipped('This functionality requires uopz >= 6.0.x to work correctly');
-        }
-
         $this->mock_method([ $this->class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
@@ -138,11 +133,6 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      */
     public function testUnmockMethodFromParent(): void
     {
-        if (phpversion('uopz')[0] < 6)
-        {
-            $this->markTestSkipped('This functionality requires uopz >= 6.0.x to work correctly');
-        }
-
         $this->mock_method([ $this->child_class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
