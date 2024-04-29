@@ -20,6 +20,8 @@ use RuntimeException;
 
 /**
  * This class contains helper code for the Lunr unit tests.
+ *
+ * @deprecated Use `LunrBaseTest` instead
  */
 abstract class LegacyBaseTest extends TestCase
 {
