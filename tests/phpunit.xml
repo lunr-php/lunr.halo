@@ -15,10 +15,7 @@
     </php>
     <testsuites>
         <testsuite name="Halo">
-            <file>../src/Lunr/Halo/Tests/LegacyBaseTestReflectionTest.php</file>
-            <file>../src/Lunr/Halo/Tests/LegacyBaseTestMockTest.php</file>
-            <file>../src/Lunr/Halo/Tests/LunrBaseTestReflectionTest.php</file>
-            <file>../src/Lunr/Halo/Tests/LunrBaseTestMockTest.php</file>
+            <directory>../src/Lunr/Halo/Tests/</directory>
         </testsuite>
     </testsuites>
     <coverage>
