@@ -11,7 +11,6 @@
 namespace Lunr\Halo\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains the tests for the unit test base class.

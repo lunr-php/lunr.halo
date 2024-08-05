@@ -10,13 +10,12 @@
 
 namespace Lunr\Halo;
 
+use Closure;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
-use Throwable;
-use Closure;
-use ReflectionClass;
 use RuntimeException;
 
 /**
@@ -511,7 +510,7 @@ abstract class LunrBaseTest extends TestCase
         $content = file_get_contents($file);
         if ($content === FALSE)
         {
-            throw new \RuntimeException("File \"$file\" could not be read!");
+            throw new RuntimeException("File \"$file\" could not be read!");
         }
 
         $this->expectOutputString($content);
