@@ -7,3 +7,5 @@ parameters:
         - phpstan.autoload.inc.php
     excludePaths:
         - ../src/*/Tests/*
+    ignoreErrors:
+        - identifier: trait.unused
