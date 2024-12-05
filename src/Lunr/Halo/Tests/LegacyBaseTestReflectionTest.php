@@ -18,7 +18,7 @@ use ReflectionProperty;
  *
  * @covers Lunr\Halo\LegacyBaseTest
  */
-class LegacyBaseTestReflectionTest extends LegacyBaseTestTest
+class LegacyBaseTestReflectionTest extends LegacyBaseTestTestCase
 {
 
     /**

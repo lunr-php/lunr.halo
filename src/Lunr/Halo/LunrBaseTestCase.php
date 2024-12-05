@@ -21,7 +21,7 @@ use RuntimeException;
 /**
  * This class contains helper code for the Lunr unit tests.
  */
-abstract class LunrBaseTest extends TestCase
+abstract class LunrBaseTestCase extends TestCase
 {
 
     /**

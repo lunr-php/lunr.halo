@@ -3,7 +3,7 @@
 
 Lunr.Halo is a set of PHPUnit helper libraries.
 
-- `LunrBaseTest` extends `PHPUnit\Framework\TestCase` and offers convenience methods
+- `LunrBaseTestCase` extends `PHPUnit\Framework\TestCase` and offers convenience methods
    to access class methods/properties using reflection as well as mocking functions/methods
    using uopz (PHP 7) and runkit (PHP 5).
 - `CallbackMock` is a Mock class to help test callbacks

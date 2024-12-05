@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the LunrBaseTestReflectionTest class.
+ * This file contains the LunrBaseTestCaseReflectionTest class.
  *
  * SPDX-FileCopyrightText: Copyright 2018 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -16,15 +16,15 @@ use ReflectionProperty;
 /**
  * This class contains the tests for the unit test base class.
  *
- * @covers Lunr\Halo\LunrBaseTest
+ * @covers Lunr\Halo\LunrBaseTestCase
  */
-class LunrBaseTestReflectionTest extends LunrBaseTestTest
+class LunrBaseTestCaseReflectionTest extends LunrBaseTestCaseTestCase
 {
 
     /**
      * Test get_accessible_reflection_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::get_accessible_reflection_method
+     * @covers Lunr\Halo\LunrBaseTestCase::get_accessible_reflection_method
      */
     public function testGetAccessibleReflectionMethod(): void
     {
@@ -37,7 +37,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     /**
      * Test get_reflection_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::get_reflection_method
+     * @covers Lunr\Halo\LunrBaseTestCase::get_reflection_method
      */
     public function testGetReflectionMethod(): void
     {
@@ -50,7 +50,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     /**
      * Test get_accessible_reflection_property()
      *
-     * @covers Lunr\Halo\LunrBaseTest::get_accessible_reflection_property
+     * @covers Lunr\Halo\LunrBaseTestCase::get_accessible_reflection_property
      */
     public function testGetAccessibleReflectionProperty(): void
     {
@@ -63,7 +63,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     /**
      * Test get_reflection_property()
      *
-     * @covers Lunr\Halo\LunrBaseTest::get_reflection_property
+     * @covers Lunr\Halo\LunrBaseTestCase::get_reflection_property
      */
     public function testGetReflectionProperty(): void
     {
@@ -76,7 +76,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     /**
      * Test get_reflection_property_value()
      *
-     * @covers Lunr\Halo\LunrBaseTest::get_reflection_property_value
+     * @covers Lunr\Halo\LunrBaseTestCase::get_reflection_property_value
      */
     public function testGetReflectionPropertyValue(): void
     {
@@ -88,7 +88,7 @@ class LunrBaseTestReflectionTest extends LunrBaseTestTest
     /**
      * Test set_reflection_property_value()
      *
-     * @covers Lunr\Halo\LunrBaseTest::set_reflection_property_value
+     * @covers Lunr\Halo\LunrBaseTestCase::set_reflection_property_value
      */
     public function testSetReflectionPropertyValue(): void
     {

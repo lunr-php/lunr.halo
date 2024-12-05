@@ -15,7 +15,7 @@ namespace Lunr\Halo\Tests;
  *
  * @covers Lunr\Halo\LegacyBaseTest
  */
-class LegacyBaseTestMockTest extends LegacyBaseTestTest
+class LegacyBaseTestMockTest extends LegacyBaseTestTestCase
 {
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the LunrBaseTestMockTest class.
+ * This file contains the LunrBaseTestCaseMockTest class.
  *
  * SPDX-FileCopyrightText: Copyright 2018 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -13,15 +13,15 @@ namespace Lunr\Halo\Tests;
 /**
  * This class contains the tests for the unit test base class.
  *
- * @covers Lunr\Halo\LunrBaseTest
+ * @covers Lunr\Halo\LunrBaseTestCase
  */
-class LunrBaseTestMockTest extends LunrBaseTestTest
+class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
 {
 
     /**
      * Test mock_function()
      *
-     * @covers Lunr\Halo\LunrBaseTest::mock_function()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_function()
      */
     public function testMockFunction(): void
     {
@@ -35,7 +35,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test unmock_function()
      *
-     * @covers Lunr\Halo\LunrBaseTest::unmock_function()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_function()
      */
     public function testUnmockFunction(): void
     {
@@ -51,7 +51,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test mock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::mock_method()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_method()
      */
     public function testMockMethod(): void
     {
@@ -67,7 +67,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test mock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::mock_method()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_method()
      */
     public function testMockMethodFromObject(): void
     {
@@ -81,7 +81,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test mock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::mock_method()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_method()
      */
     public function testMockMethodFromParent(): void
     {
@@ -95,7 +95,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test unmock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::unmock_method()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_method()
      */
     public function testUnmockMethod(): void
     {
@@ -113,7 +113,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test unmock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::unmock_method()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_method()
      */
     public function testUnmockMethodFromObject(): void
     {
@@ -129,7 +129,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test unmock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTest::unmock_method()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_method()
      */
     public function testUnmockMethodFromParent(): void
     {
@@ -145,7 +145,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test constant_redefine()
      *
-     * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_redefine()
      */
     public function testConstantRedefineWithPublicConstant(): void
     {
@@ -167,7 +167,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
     /**
      * Test constant_redefine()
      *
-     * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_redefine()
      */
     public function testConstantRedefineWithProtectedConstant(): void
     {
@@ -200,7 +200,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTest::constant_redefine()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_redefine()
      */
     public function testGlobalConstantRedefine(): void
     {
@@ -221,7 +221,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTest::constant_undefine()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_undefine()
      */
     public function testConstantUndefineWithPublicConstant(): void
     {
@@ -237,7 +237,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTest::constant_undefine()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_undefine()
      */
     public function testConstantUndefineWithProtectedConstant(): void
     {
@@ -257,7 +257,7 @@ class LunrBaseTestMockTest extends LunrBaseTestTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTest::constant_undefine()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_undefine()
      */
     public function testGlobalConstantUndefine(): void
     {
