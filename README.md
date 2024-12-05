@@ -1,5 +1,5 @@
 # Lunr.Halo
-[![build status](https://api.travis-ci.org/lunr-php/lunr.halo.svg)](https://travis-ci.org/lunr-php/lunr.halo) [![codecov](https://codecov.io/gh/lunr-php/lunr.halo/branch/master/graph/badge.svg)](https://codecov.io/gh/lunr-php/lunr.halo)
+[![build status](https://github.com/lunr-php/lunr.halo/actions/workflows/php-tests.yml/badge.svg)]([https://travis-ci.org/lunr-php/lunr.halo](https://github.com/lunr-php/lunr.halo/actions/workflows/php-tests.yml)) [![codecov](https://codecov.io/gh/lunr-php/lunr.halo/branch/master/graph/badge.svg)](https://codecov.io/gh/lunr-php/lunr.halo)
 
 Lunr.Halo is a set of PHPUnit helper libraries.
 
