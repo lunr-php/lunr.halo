@@ -68,7 +68,7 @@ abstract class LunrBaseTest extends TestCase
 
     /**
      * Reflection instance of the tested class.
-     * @var ReflectionClass
+     * @var ReflectionClass<object>
      */
     protected ReflectionClass $reflection;
 

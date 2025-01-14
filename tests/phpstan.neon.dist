@@ -3,8 +3,9 @@
 # SPDX-License-Identifier: CC0-1.0
 
 parameters:
-    checkGenericClassInNonGenericObjectType: false
     bootstrapFiles:
         - phpstan.autoload.inc.php
     excludePaths:
         - ../src/*/Tests/*
+    ignoreErrors:
+        - identifier: trait.unused
