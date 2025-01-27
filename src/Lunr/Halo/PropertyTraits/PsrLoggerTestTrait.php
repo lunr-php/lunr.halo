@@ -20,14 +20,14 @@ trait PsrLoggerTestTrait
      * Default property name for the logger
      * @var string
      */
-    private string $property_name_logger = 'logger';
+    private string $propertyNameLogger = 'logger';
 
     /**
      * Test that the Logger class is passed correctly.
      */
     public function testLoggerIsSetCorrectly(): void
     {
-        $property = $this->get_reflection_property_value($this->property_name_logger);
+        $property = $this->get_reflection_property_value($this->propertyNameLogger);
 
         $this->assertSame($property, $this->logger);
         $this->assertInstanceOf('Psr\Log\LoggerInterface', $property);

@@ -85,11 +85,11 @@ class LegacyBaseTestMockTest extends LegacyBaseTestTestCase
      */
     public function testMockMethodFromParent(): void
     {
-        $this->mock_method([ $this->child_class, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $this->childClass, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
-        $this->unmock_method([ $this->child_class, 'baz' ]);
+        $this->unmock_method([ $this->childClass, 'baz' ]);
     }
 
     /**
@@ -133,11 +133,11 @@ class LegacyBaseTestMockTest extends LegacyBaseTestTestCase
      */
     public function testUnmockMethodFromParent(): void
     {
-        $this->mock_method([ $this->child_class, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $this->childClass, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
-        $this->unmock_method([ $this->child_class, 'baz' ]);
+        $this->unmock_method([ $this->childClass, 'baz' ]);
 
         $this->assertEquals('string', $this->class->baz());
     }

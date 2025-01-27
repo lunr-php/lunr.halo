@@ -19,14 +19,14 @@ trait PsrContainerTestTrait
      * Default property name for the container
      * @var string
      */
-    private string $property_name_container = 'container';
+    private string $propertyNameContainer = 'container';
 
     /**
      * Test that the Container class is passed correctly.
      */
     public function testContainerIsSetCorrectly(): void
     {
-        $property = $this->get_reflection_property_value($this->property_name_container);
+        $property = $this->get_reflection_property_value($this->propertyNameContainer);
 
         $this->assertSame($property, $this->container);
         $this->assertInstanceOf('Psr\Container\ContainerInterface', $property);

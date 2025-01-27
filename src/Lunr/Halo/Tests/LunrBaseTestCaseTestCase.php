@@ -30,14 +30,14 @@ abstract class LunrBaseTestCaseTestCase extends LunrBaseTestCase
      * Instance of a child class.
      * @var MockChildClass
      */
-    protected MockChildClass $child_class;
+    protected MockChildClass $childClass;
 
     /**
      * Unit test constructor.
      */
     public function setUp(): void
     {
-        $this->child_class = new MockChildClass();
+        $this->childClass = new MockChildClass();
 
         $this->class = new MockClass();
 
@@ -51,7 +51,7 @@ abstract class LunrBaseTestCaseTestCase extends LunrBaseTestCase
     {
         parent::tearDown();
 
-        unset($this->child_class);
+        unset($this->childClass);
         unset($this->class);
     }
 

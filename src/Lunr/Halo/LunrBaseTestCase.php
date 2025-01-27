@@ -34,37 +34,37 @@ abstract class LunrBaseTestCase extends TestCase
      * Array of mock class remaps for uopz.
      * @var array<string, array<string, string>>
      */
-    protected array $mock_remap = [];
+    protected array $mockRemap = [];
 
     /**
      * Array of output messages to expect.
      * @var string[]
      */
-    private array $output_strings = [];
+    private array $outputStrings = [];
 
     /**
      * Whether we have an error handler set for E_USER_NOTICE.
      * @var bool
      */
-    private bool $user_notice_handler_set = FALSE;
+    private bool $isUserNoticeHandlerSet = FALSE;
 
     /**
      * Whether we have an error handler set for E_USER_WARNING.
      * @var bool
      */
-    private bool $user_warning_handler_set = FALSE;
+    private bool $isUserWarningHandlerSet = FALSE;
 
     /**
      * Whether we have an error handler set for E_USER_ERROR.
      * @var bool
      */
-    private bool $user_error_handler_set = FALSE;
+    private bool $isUserErrorHandlerSet = FALSE;
 
     /**
      * Whether we have an error handler set for E_USER_DEPRECATED.
      * @var bool
      */
-    private bool $user_deprecated_handler_set = FALSE;
+    private bool $isUserDeprecatedHandlerSet = FALSE;
 
     /**
      * Reflection instance of the tested class.
@@ -98,31 +98,31 @@ abstract class LunrBaseTestCase extends TestCase
      */
     public function tearDown(): void
     {
-        if ($this->user_notice_handler_set)
+        if ($this->isUserNoticeHandlerSet)
         {
             restore_error_handler();
-            $this->user_notice_handler_set = FALSE;
+            $this->isUserNoticeHandlerSet = FALSE;
         }
 
-        if ($this->user_warning_handler_set)
+        if ($this->isUserWarningHandlerSet)
         {
             restore_error_handler();
-            $this->user_warning_handler_set = FALSE;
+            $this->isUserWarningHandlerSet = FALSE;
         }
 
-        if ($this->user_error_handler_set)
+        if ($this->isUserErrorHandlerSet)
         {
             restore_error_handler();
-            $this->user_error_handler_set = FALSE;
+            $this->isUserErrorHandlerSet = FALSE;
         }
 
-        if ($this->user_deprecated_handler_set)
+        if ($this->isUserDeprecatedHandlerSet)
         {
             restore_error_handler();
-            $this->user_deprecated_handler_set = FALSE;
+            $this->isUserDeprecatedHandlerSet = FALSE;
         }
 
-        unset($this->mock_remap);
+        unset($this->mockRemap);
         unset($this->class);
         unset($this->reflection);
     }
@@ -302,12 +302,12 @@ abstract class LunrBaseTestCase extends TestCase
             $this->markTestSkipped('The uopz extension is not available.');
         }
 
-        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
-        $method_name = $method[1];
+        $className  = is_object($method[0]) ? get_class($method[0]) : $method[0];
+        $methodName = $method[1];
 
         try
         {
-            uopz_set_return($class_name, $method_name, $mock, TRUE);
+            uopz_set_return($className, $methodName, $mock, TRUE);
         }
         catch (RuntimeException $e)
         {
@@ -318,11 +318,11 @@ abstract class LunrBaseTestCase extends TestCase
                 throw $e;
             }
 
-            $parent_class_name = substr($e->getMessage(), $pos + 25);
+            $parentClassName = substr($e->getMessage(), $pos + 25);
 
-            uopz_set_return($parent_class_name, $method_name, $mock, TRUE);
+            uopz_set_return($parentClassName, $methodName, $mock, TRUE);
 
-            $this->mock_remap[$class_name][$method_name] = $parent_class_name;
+            $this->mockRemap[$className][$methodName] = $parentClassName;
         }
     }
 
@@ -352,16 +352,16 @@ abstract class LunrBaseTestCase extends TestCase
             $this->markTestSkipped('The uopz extension is not available.');
         }
 
-        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
-        $method_name = $method[1];
+        $className  = is_object($method[0]) ? get_class($method[0]) : $method[0];
+        $methodName = $method[1];
 
-        if (array_key_exists($class_name, $this->mock_remap) && array_key_exists($method_name, $this->mock_remap[$class_name]))
+        if (array_key_exists($className, $this->mockRemap) && array_key_exists($methodName, $this->mockRemap[$className]))
         {
-            uopz_unset_return($this->mock_remap[$class_name][$method_name], $method_name);
+            uopz_unset_return($this->mockRemap[$className][$methodName], $methodName);
         }
         else
         {
-            uopz_unset_return($class_name, $method_name);
+            uopz_unset_return($className, $methodName);
         }
     }
 
@@ -525,7 +525,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     public function expectUserNotice(string $message): void
     {
-        if (!$this->user_notice_handler_set)
+        if (!$this->isUserNoticeHandlerSet)
         {
             set_error_handler(
                 function (int $errno, string $errstr): bool {
@@ -534,12 +534,12 @@ abstract class LunrBaseTestCase extends TestCase
                 },
                 E_USER_NOTICE,
             );
-            $this->user_notice_handler_set = TRUE;
+            $this->isUserNoticeHandlerSet = TRUE;
         }
 
-        $this->output_strings[] = "NOTICE: $message\n";
+        $this->outputStrings[] = "NOTICE: $message\n";
 
-        $this->expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->outputStrings));
     }
 
     /**
@@ -551,7 +551,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     public function expectUserWarning(string $message): void
     {
-        if (!$this->user_warning_handler_set)
+        if (!$this->isUserWarningHandlerSet)
         {
             set_error_handler(
                 function (int $errno, string $errstr): bool {
@@ -560,12 +560,12 @@ abstract class LunrBaseTestCase extends TestCase
                 },
                 E_USER_WARNING,
             );
-            $this->user_warning_handler_set = TRUE;
+            $this->isUserWarningHandlerSet = TRUE;
         }
 
-        $this->output_strings[] = "WARNING: $message\n";
+        $this->outputStrings[] = "WARNING: $message\n";
 
-        $this->expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->outputStrings));
     }
 
     /**
@@ -577,7 +577,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     public function expectUserError(string $message): void
     {
-        if (!$this->user_error_handler_set)
+        if (!$this->isUserErrorHandlerSet)
         {
             set_error_handler(
                 function (int $errno, string $errstr): bool {
@@ -586,12 +586,12 @@ abstract class LunrBaseTestCase extends TestCase
                 },
                 E_USER_ERROR,
             );
-            $this->user_error_handler_set = TRUE;
+            $this->isUserErrorHandlerSet = TRUE;
         }
 
-        $this->output_strings[] = "ERROR: $message\n";
+        $this->outputStrings[] = "ERROR: $message\n";
 
-        $this->expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->outputStrings));
     }
 
     /**
@@ -603,7 +603,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     public function expectUserDeprecated(string $message): void
     {
-        if (!$this->user_deprecated_handler_set)
+        if (!$this->isUserDeprecatedHandlerSet)
         {
             set_error_handler(
                 function (int $errno, string $errstr): bool {
@@ -612,12 +612,12 @@ abstract class LunrBaseTestCase extends TestCase
                 },
                 E_USER_DEPRECATED,
             );
-            $this->user_deprecated_handler_set = TRUE;
+            $this->isUserDeprecatedHandlerSet = TRUE;
         }
 
-        $this->output_strings[] = "DEPRECATED: $message\n";
+        $this->outputStrings[] = "DEPRECATED: $message\n";
 
-        $this->expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->outputStrings));
     }
 
     /**
@@ -632,9 +632,9 @@ abstract class LunrBaseTestCase extends TestCase
      */
     public function expectCustomOutputString(string $expectedString): void
     {
-        $this->output_strings[] = $expectedString;
+        $this->outputStrings[] = $expectedString;
 
-        $this->expectOutputString(implode("\n", $this->output_strings));
+        $this->expectOutputString(implode("\n", $this->outputStrings));
     }
 
 }

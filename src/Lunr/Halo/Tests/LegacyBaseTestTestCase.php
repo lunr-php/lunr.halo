@@ -25,14 +25,14 @@ abstract class LegacyBaseTestTestCase extends LegacyBaseTest
      * Instance of a child class.
      * @var MockChildClass
      */
-    protected MockChildClass $child_class;
+    protected MockChildClass $childClass;
 
     /**
      * Unit test constructor.
      */
     public function setUp(): void
     {
-        $this->child_class = new MockChildClass();
+        $this->childClass = new MockChildClass();
 
         $this->class      = new MockClass();
         $this->reflection = new ReflectionClass(MockClass::class);
@@ -43,7 +43,7 @@ abstract class LegacyBaseTestTestCase extends LegacyBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->child_class);
+        unset($this->childClass);
         unset($this->class);
         unset($this->reflection);
     }
