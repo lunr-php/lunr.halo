@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the LunrBaseTestCaseMockTest class.
+ * This file contains the LunrBaseTestCaseDeprecatedMockTest class.
  *
  * SPDX-FileCopyrightText: Copyright 2018 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -15,149 +15,149 @@ namespace Lunr\Halo\Tests;
  *
  * @covers Lunr\Halo\LunrBaseTestCase
  */
-class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
+class LunrBaseTestCaseDeprecatedMockTest extends LunrBaseTestCaseTestCase
 {
 
     /**
-     * Test mockFunction()
+     * Test mock_function()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::mockFunction()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_function()
      */
     public function testMockFunction(): void
     {
-        $this->mockFunction('is_int', function () { return 'Nope!'; });
+        $this->mock_function('is_int', function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', is_int(1));
 
-        $this->unmockFunction('is_int');
+        $this->unmock_function('is_int');
     }
 
     /**
-     * Test unmockFunction()
+     * Test unmock_function()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::unmockFunction()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_function()
      */
     public function testUnmockFunction(): void
     {
-        $this->mockFunction('is_int', function () { return 'Nope!'; });
+        $this->mock_function('is_int', function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', is_int(1));
 
-        $this->unmockFunction('is_int');
+        $this->unmock_function('is_int');
 
         $this->assertTrue(is_int(1));
     }
 
     /**
-     * Test mockMethod()
+     * Test mock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::mockMethod()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_method()
      */
     public function testMockMethod(): void
     {
         $class = new MockClass();
 
-        $this->mockMethod([ $class, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $class->baz());
 
-        $this->unmockMethod([ $class, 'baz' ]);
+        $this->unmock_method([ $class, 'baz' ]);
     }
 
     /**
-     * Test mockMethod()
+     * Test mock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::mockMethod()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_method()
      */
     public function testMockMethodFromObject(): void
     {
-        $this->mockMethod([ $this->class, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $this->class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
-        $this->unmockMethod([ $this->class, 'baz' ]);
+        $this->unmock_method([ $this->class, 'baz' ]);
     }
 
     /**
-     * Test mockMethod()
+     * Test mock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::mockMethod()
+     * @covers Lunr\Halo\LunrBaseTestCase::mock_method()
      */
     public function testMockMethodFromParent(): void
     {
-        $this->mockMethod([ $this->childClass, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $this->childClass, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
-        $this->unmockMethod([ $this->childClass, 'baz' ]);
+        $this->unmock_method([ $this->childClass, 'baz' ]);
     }
 
     /**
-     * Test unmockMethod()
+     * Test unmock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::unmockMethod()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_method()
      */
     public function testUnmockMethod(): void
     {
         $class = new MockClass();
 
-        $this->mockMethod([ $class, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $class->baz());
 
-        $this->unmockMethod([ $class, 'baz' ]);
+        $this->unmock_method([ $class, 'baz' ]);
 
         $this->assertEquals('string', $class->baz());
     }
 
     /**
-     * Test unmockMethod()
+     * Test unmock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::unmockMethod()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_method()
      */
     public function testUnmockMethodFromObject(): void
     {
-        $this->mockMethod([ $this->class, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $this->class, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
-        $this->unmockMethod([ $this->class, 'baz' ]);
+        $this->unmock_method([ $this->class, 'baz' ]);
 
         $this->assertEquals('string', $this->class->baz());
     }
 
     /**
-     * Test unmockMethod()
+     * Test unmock_method()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::unmockMethod()
+     * @covers Lunr\Halo\LunrBaseTestCase::unmock_method()
      */
     public function testUnmockMethodFromParent(): void
     {
-        $this->mockMethod([ $this->childClass, 'baz' ], function () { return 'Nope!'; });
+        $this->mock_method([ $this->childClass, 'baz' ], function () { return 'Nope!'; });
 
         $this->assertEquals('Nope!', $this->class->baz());
 
-        $this->unmockMethod([ $this->childClass, 'baz' ]);
+        $this->unmock_method([ $this->childClass, 'baz' ]);
 
         $this->assertEquals('string', $this->class->baz());
     }
 
     /**
-     * Test redefineConstant()
+     * Test constant_redefine()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::redefineConstant()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_redefine()
      */
     public function testConstantRedefineWithPublicConstant(): void
     {
         $this->assertSame('constant', $this->class::FOOBAR);
 
-        $this->redefineConstant('Lunr\Halo\Tests\MockClass::FOOBAR', 'new value');
+        $this->constant_redefine('Lunr\Halo\Tests\MockClass::FOOBAR', 'new value');
 
         $class = new MockClass();
 
         $this->assertSame('new value', $class::FOOBAR);
 
-        $this->redefineConstant('Lunr\Halo\Tests\MockClass::FOOBAR', 'constant');
+        $this->constant_redefine('Lunr\Halo\Tests\MockClass::FOOBAR', 'constant');
 
         $class = new MockClass();
 
@@ -165,9 +165,9 @@ class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
     }
 
     /**
-     * Test redefineConstant()
+     * Test constant_redefine()
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::redefineConstant()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_redefine()
      */
     public function testConstantRedefineWithProtectedConstant(): void
     {
@@ -177,7 +177,7 @@ class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
 
         $this->assertSame('constant', $constant);
 
-        $this->redefineConstant('Lunr\Halo\Tests\MockClass::BARFOO', 'new value');
+        $this->constant_redefine('Lunr\Halo\Tests\MockClass::BARFOO', 'new value');
 
         // https://github.com/krakjoe/uopz/issues/111
         //$this->assertSame('new value', $this->class->constant());
@@ -186,7 +186,7 @@ class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
 
         $this->assertSame('new value', $constant);
 
-        $this->redefineConstant('Lunr\Halo\Tests\MockClass::BARFOO', 'constant');
+        $this->constant_redefine('Lunr\Halo\Tests\MockClass::BARFOO', 'constant');
 
         $this->assertSame('constant', $this->class->constant());
 
@@ -196,48 +196,48 @@ class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
     }
 
     /**
-     * Test redefineConstant() with a global constant
+     * Test constant_redefine() with a global constant
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::redefineConstant()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_redefine()
      */
     public function testGlobalConstantRedefine(): void
     {
         define('FOOBAR', 'constant');
         $this->assertSame('constant', FOOBAR);
 
-        $this->redefineConstant('FOOBAR', 'new value');
+        $this->constant_redefine('FOOBAR', 'new value');
 
         $this->assertSame('new value', FOOBAR);
 
-        $this->redefineConstant('FOOBAR', 'constant');
+        $this->constant_redefine('FOOBAR', 'constant');
 
         $this->assertSame('constant', FOOBAR);
     }
 
     /**
-     * Test undefineConstant()
+     * Test constant_undefine()
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::undefineConstant()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_undefine()
      */
     public function testConstantUndefineWithPublicConstant(): void
     {
         $this->assertSame('constant', $this->class::FOOBAR);
 
-        $this->undefineConstant('Lunr\Halo\Tests\MockClass::FOOBAR');
+        $this->constant_undefine('Lunr\Halo\Tests\MockClass::FOOBAR');
 
         $this->assertFalse(defined('Lunr\Halo\Tests\MockClass::FOOBAR'));
     }
 
     /**
-     * Test undefineConstant()
+     * Test constant_undefine()
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::undefineConstant()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_undefine()
      */
     public function testConstantUndefineWithProtectedConstant(): void
     {
@@ -247,24 +247,24 @@ class LunrBaseTestCaseMockTest extends LunrBaseTestCaseTestCase
 
         $this->assertSame('constant', $constant);
 
-        $this->undefineConstant('Lunr\Halo\Tests\MockClass::BARFOO');
+        $this->constant_undefine('Lunr\Halo\Tests\MockClass::BARFOO');
 
         $this->assertFalse(defined('Lunr\Halo\Tests\MockClass::BARFOO'));
     }
 
     /**
-     * Test undefineConstant() with a global constant
+     * Test constant_undefine() with a global constant
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Halo\LunrBaseTestCase::undefineConstant()
+     * @covers Lunr\Halo\LunrBaseTestCase::constant_undefine()
      */
     public function testGlobalConstantUndefine(): void
     {
         define('FOOBAR', 'constant');
         $this->assertSame('constant', FOOBAR);
 
-        $this->undefineConstant('FOOBAR');
+        $this->constant_undefine('FOOBAR');
 
         $this->assertFalse(defined('FOOBAR'));
     }

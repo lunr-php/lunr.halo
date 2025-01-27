@@ -132,9 +132,23 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @param string $method Method name
      *
+     * @deprecated Use getReflectionMethod() instead
+     *
      * @return ReflectionMethod The ReflectionMethod instance
      */
     protected function get_reflection_method(string $method): ReflectionMethod
+    {
+        return $this->getReflectionMethod($method);
+    }
+
+    /**
+     * Get a ReflectionMethod.
+     *
+     * @param string $method Method name
+     *
+     * @return ReflectionMethod The ReflectionMethod instance
+     */
+    protected function getReflectionMethod(string $method): ReflectionMethod
     {
         return $this->reflection->getMethod($method);
     }
@@ -145,12 +159,41 @@ abstract class LunrBaseTestCase extends TestCase
      * @param string $property Property name
      * @param mixed  $value    New value of the property
      *
+     * @deprecated Use setReflectionPropertyValue() instead
+     *
      * @return void
      */
     protected function set_reflection_property_value(string $property, $value): void
     {
-        $this->get_reflection_property($property)
+        $this->setReflectionPropertyValue($property, $value);
+    }
+
+    /**
+     * Set a value for a class property.
+     *
+     * @param string $property Property name
+     * @param mixed  $value    New value of the property
+     *
+     * @return void
+     */
+    protected function setReflectionPropertyValue(string $property, $value): void
+    {
+        $this->getReflectionProperty($property)
              ->setValue($this->class, $value);
+    }
+
+    /**
+     * Get a ReflectionProperty.
+     *
+     * @param string $property Property name
+     *
+     * @deprecated Use getReflectionProperty() instead
+     *
+     * @return ReflectionProperty The ReflectionProperty instance
+     */
+    protected function get_reflection_property(string $property): ReflectionProperty
+    {
+        return $this->getReflectionProperty($property);
     }
 
     /**
@@ -160,7 +203,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return ReflectionProperty The ReflectionProperty instance
      */
-    protected function get_reflection_property(string $property): ReflectionProperty
+    protected function getReflectionProperty(string $property): ReflectionProperty
     {
         return $this->reflection->getProperty($property);
     }
@@ -170,12 +213,41 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @param string $property Property name
      *
+     * @deprecated Use getReflectionPropertyValue() instead
+     *
      * @return mixed Property value
      */
     protected function get_reflection_property_value(string $property): mixed
     {
-        return $this->get_reflection_property($property)
+        return $this->getReflectionPropertyValue($property);
+    }
+
+    /**
+     * Get a value from a class property.
+     *
+     * @param string $property Property name
+     *
+     * @return mixed Property value
+     */
+    protected function getReflectionPropertyValue(string $property): mixed
+    {
+        return $this->getReflectionProperty($property)
                     ->getValue($this->class);
+    }
+
+    /**
+     * Mock a PHP function.
+     *
+     * @param string  $name Function name
+     * @param Closure $mock Replacement code for the function
+     *
+     * @deprecated Use mockFunction() instead
+     *
+     * @return void
+     */
+    protected function mock_function(string $name, Closure $mock): void
+    {
+        $this->mockFunction($name, $mock);
     }
 
     /**
@@ -186,9 +258,9 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    protected function mock_function(string $name, Closure $mock): void
+    protected function mockFunction(string $name, Closure $mock): void
     {
-        $this->uopz_mock_function($name, $mock);
+        $this->uopzMockFunction($name, $mock);
     }
 
     /**
@@ -199,7 +271,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    private function uopz_mock_function(string $name, Closure $mock): void
+    private function uopzMockFunction(string $name, Closure $mock): void
     {
         if (!extension_loaded('uopz'))
         {
@@ -214,11 +286,25 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @param string $name Function name
      *
+     * @deprecated Use unmockFunction() instead
+     *
      * @return void
      */
     protected function unmock_function(string $name): void
     {
-        $this->uopz_unmock_function($name);
+        $this->unmockFunction($name);
+    }
+
+    /**
+     * Unmock a PHP function.
+     *
+     * @param string $name Function name
+     *
+     * @return void
+     */
+    protected function unmockFunction(string $name): void
+    {
+        $this->uopzUnmockFunction($name);
     }
 
     /**
@@ -228,7 +314,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    private function uopz_unmock_function(string $name): void
+    private function uopzUnmockFunction(string $name): void
     {
         if (!extension_loaded('uopz'))
         {
@@ -248,12 +334,31 @@ abstract class LunrBaseTestCase extends TestCase
      * @param string                   $visibility Visibility of the redefined method
      * @param string                   $args       Comma-delimited list of arguments for the redefined method
      *
+     * @deprecated Use mockMethod() instead
+     *
      * @return void
      */
     protected function mock_method(array $method, Closure $mock, string $visibility = 'public', string $args = ''): void
     {
+        $this->mockMethod($method, $mock, $visibility, $args);
+    }
+
+    /**
+     * Mock a method.
+     *
+     * Replace the code of a function of a specific class
+     *
+     * @param array<int,object|string> $method     Method defined in an array form
+     * @param Closure                  $mock       Replacement code for the method
+     * @param string                   $visibility Visibility of the redefined method
+     * @param string                   $args       Comma-delimited list of arguments for the redefined method
+     *
+     * @return void
+     */
+    protected function mockMethod(array $method, Closure $mock, string $visibility = 'public', string $args = ''): void
+    {
         //UOPZ does not support changing the visibility with the currently used function
-        $this->uopz_mock_method($method, $mock, $args);
+        $this->uopzMockMethod($method, $mock, $args);
     }
 
     /**
@@ -267,7 +372,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    private function uopz_mock_method(array $method, Closure $mock, string $args = ''): void
+    private function uopzMockMethod(array $method, Closure $mock, string $args = ''): void
     {
         if (!extension_loaded('uopz'))
         {
@@ -303,11 +408,25 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @param array<int,object|string> $method Method defined in an array form
      *
+     * @deprecated Use unmockMethod() instead
+     *
      * @return void
      */
     protected function unmock_method(array $method): void
     {
-        $this->uopz_unmock_method($method);
+        $this->unmockMethod($method);
+    }
+
+    /**
+     * Unmock a method.
+     *
+     * @param array<int,object|string> $method Method defined in an array form
+     *
+     * @return void
+     */
+    protected function unmockMethod(array $method): void
+    {
+        $this->uopzUnmockMethod($method);
     }
 
     /**
@@ -317,7 +436,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    private function uopz_unmock_method(array $method): void
+    private function uopzUnmockMethod(array $method): void
     {
         if (!extension_loaded('uopz'))
         {
@@ -343,9 +462,24 @@ abstract class LunrBaseTestCase extends TestCase
      * @param string $constant The constant
      * @param mixed  $value    New value
      *
+     * @deprecated Use redefineConstant() instead
+     *
      * @return void
      */
     protected function constant_redefine(string $constant, $value): void
+    {
+        $this->redefineConstant($constant, $value);
+    }
+
+    /**
+     * Redefine a constant with uopz
+     *
+     * @param string $constant The constant
+     * @param mixed  $value    New value
+     *
+     * @return void
+     */
+    protected function redefineConstant(string $constant, $value): void
     {
         if (!extension_loaded('uopz'))
         {
@@ -369,9 +503,23 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @param string $constant The constant
      *
+     * @deprecated Use undefineConstant() instead
+     *
      * @return void
      */
     protected function constant_undefine(string $constant): void
+    {
+        $this->undefineConstant($constant);
+    }
+
+    /**
+     * Undefine a constant with uopz
+     *
+     * @param string $constant The constant
+     *
+     * @return void
+     */
+    protected function undefineConstant(string $constant): void
     {
         if (!extension_loaded('uopz'))
         {
