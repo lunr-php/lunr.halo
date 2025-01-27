@@ -22,19 +22,6 @@ class LunrBaseTestCaseReflectionTest extends LunrBaseTestCaseTestCase
 {
 
     /**
-     * Test get_accessible_reflection_method()
-     *
-     * @covers Lunr\Halo\LunrBaseTestCase::get_accessible_reflection_method
-     */
-    public function testGetAccessibleReflectionMethod(): void
-    {
-        $method = $this->get_accessible_reflection_method('baz');
-
-        $this->assertInstanceOf(ReflectionMethod::class, $method);
-        $this->assertEquals('baz', $method->name);
-    }
-
-    /**
      * Test get_reflection_method()
      *
      * @covers Lunr\Halo\LunrBaseTestCase::get_reflection_method
@@ -45,19 +32,6 @@ class LunrBaseTestCaseReflectionTest extends LunrBaseTestCaseTestCase
 
         $this->assertInstanceOf(ReflectionMethod::class, $method);
         $this->assertEquals('baz', $method->name);
-    }
-
-    /**
-     * Test get_accessible_reflection_property()
-     *
-     * @covers Lunr\Halo\LunrBaseTestCase::get_accessible_reflection_property
-     */
-    public function testGetAccessibleReflectionProperty(): void
-    {
-        $property = $this->get_accessible_reflection_property('foo');
-
-        $this->assertInstanceOf(ReflectionProperty::class, $property);
-        $this->assertEquals('foo', $property->name);
     }
 
     /**

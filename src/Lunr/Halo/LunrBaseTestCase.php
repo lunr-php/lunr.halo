@@ -128,20 +128,6 @@ abstract class LunrBaseTestCase extends TestCase
     }
 
     /**
-     * Get an accessible ReflectionMethod.
-     *
-     * @param string $method Method name
-     *
-     * @deprecated Use get_reflection_method() instead
-     *
-     * @return ReflectionMethod The ReflectionMethod instance
-     */
-    protected function get_accessible_reflection_method(string $method): ReflectionMethod
-    {
-        return $this->get_reflection_method($method);
-    }
-
-    /**
      * Get a ReflectionMethod.
      *
      * @param string $method Method name
@@ -165,20 +151,6 @@ abstract class LunrBaseTestCase extends TestCase
     {
         $this->get_reflection_property($property)
              ->setValue($this->class, $value);
-    }
-
-    /**
-     * Get an accessible ReflectionProperty.
-     *
-     * @param string $property Property name
-     *
-     * @deprecated Use get_reflection_property() instead
-     *
-     * @return ReflectionProperty The ReflectionProperty instance
-     */
-    protected function get_accessible_reflection_property(string $property): ReflectionProperty
-    {
-        return $this->get_reflection_property($property);
     }
 
     /**
