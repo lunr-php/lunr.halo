@@ -17,3 +17,4 @@ jobs:
       php-extensions: uopz
       stable-php-versions: '["8.1"]'
       experimental-php-versions: '["8.2","8.3"]'
+      minimum-phpunit-version: '10.5.x'
