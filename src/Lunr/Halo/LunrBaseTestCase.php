@@ -55,10 +55,22 @@ abstract class LunrBaseTestCase extends TestCase
     private bool $isUserWarningHandlerSet = FALSE;
 
     /**
+     * Whether we have an error handler set for E_WARNING.
+     * @var bool
+     */
+    private bool $isWarningHandlerSet = FALSE;
+
+    /**
      * Whether we have an error handler set for E_USER_ERROR.
      * @var bool
      */
     private bool $isUserErrorHandlerSet = FALSE;
+
+    /**
+     * Whether we have an error handler set for E_ERROR.
+     * @var bool
+     */
+    private bool $isErrorHandlerSet = FALSE;
 
     /**
      * Whether we have an error handler set for E_USER_DEPRECATED.
@@ -110,10 +122,22 @@ abstract class LunrBaseTestCase extends TestCase
             $this->isUserWarningHandlerSet = FALSE;
         }
 
+        if ($this->isWarningHandlerSet)
+        {
+            restore_error_handler();
+            $this->isWarningHandlerSet = FALSE;
+        }
+
         if ($this->isUserErrorHandlerSet)
         {
             restore_error_handler();
             $this->isUserErrorHandlerSet = FALSE;
+        }
+
+        if ($this->isErrorHandlerSet)
+        {
+            restore_error_handler();
+            $this->isErrorHandlerSet = FALSE;
         }
 
         if ($this->isUserDeprecatedHandlerSet)
@@ -689,6 +713,32 @@ abstract class LunrBaseTestCase extends TestCase
     }
 
     /**
+     * Expect an E_WARNING error.
+     *
+     * @param string $message The error message to expect
+     *
+     * @return void
+     */
+    public function expectWarning(string $message): void
+    {
+        if (!$this->isUserWarningHandlerSet)
+        {
+            set_error_handler(
+                function (int $errno, string $errstr): bool {
+                    echo "WARNING: $errstr\n";
+                    return TRUE;
+                },
+                E_WARNING,
+            );
+            $this->isUserWarningHandlerSet = TRUE;
+        }
+
+        $this->outputStrings[] = "WARNING: $message\n";
+
+        $this->expectOutputString(implode("\n", $this->outputStrings));
+    }
+
+    /**
      * Expect an E_USER_ERROR error.
      *
      * @param string $message The error message to expect
@@ -707,6 +757,32 @@ abstract class LunrBaseTestCase extends TestCase
                 E_USER_ERROR,
             );
             $this->isUserErrorHandlerSet = TRUE;
+        }
+
+        $this->outputStrings[] = "ERROR: $message\n";
+
+        $this->expectOutputString(implode("\n", $this->outputStrings));
+    }
+
+    /**
+     * Expect an E_ERROR error.
+     *
+     * @param string $message The error message to expect
+     *
+     * @return void
+     */
+    public function expectError(string $message): void
+    {
+        if (!$this->isErrorHandlerSet)
+        {
+            set_error_handler(
+                function (int $errno, string $errstr): bool {
+                    echo "ERROR: $errstr\n";
+                    return TRUE;
+                },
+                E_ERROR,
+            );
+            $this->isErrorHandlerSet = TRUE;
         }
 
         $this->outputStrings[] = "ERROR: $message\n";
