@@ -667,7 +667,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    public function expectUserNotice(string $message): void
+    public function expectUserNotice(string $message = ''): void
     {
         if (!$this->isUserNoticeHandlerSet)
         {
@@ -693,7 +693,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    public function expectUserWarning(string $message): void
+    public function expectUserWarning(string $message = ''): void
     {
         if (!$this->isUserWarningHandlerSet)
         {
@@ -719,7 +719,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    public function expectWarning(string $message): void
+    public function expectWarning(string $message = ''): void
     {
         if (!$this->isUserWarningHandlerSet)
         {
@@ -745,7 +745,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    public function expectUserError(string $message): void
+    public function expectUserError(string $message = ''): void
     {
         if (!$this->isUserErrorHandlerSet)
         {
@@ -771,7 +771,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    public function expectError(string $message): void
+    public function expectError(string $message = ''): void
     {
         if (!$this->isErrorHandlerSet)
         {
@@ -797,7 +797,7 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * @return void
      */
-    public function expectUserDeprecated(string $message): void
+    public function expectUserDeprecated(string $message = ''): void
     {
         if (!$this->isUserDeprecatedHandlerSet)
         {
