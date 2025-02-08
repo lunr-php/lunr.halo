@@ -21,13 +21,15 @@ use RuntimeException;
  * This class contains helper code for the Lunr unit tests.
  *
  * @deprecated Use `LunrBaseTestCase` instead
+ *
+ * @phpstan-type CallableMethod array{0:object|string,1:string}
  */
 abstract class LegacyBaseTest extends TestCase
 {
 
     /**
      * Instance of the tested class.
-     * @var mixed
+     * @var object
      */
     protected $class;
 
@@ -251,10 +253,10 @@ abstract class LegacyBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array<int,object|string> $method     Method defined in an array form
-     * @param Closure                  $mock       Replacement code for the method
-     * @param string                   $visibility Visibility of the redefined method
-     * @param string                   $args       Comma-delimited list of arguments for the redefined method
+     * @param CallableMethod $method     Method defined in an array form
+     * @param Closure        $mock       Replacement code for the method
+     * @param string         $visibility Visibility of the redefined method
+     * @param string         $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -269,9 +271,9 @@ abstract class LegacyBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array<int,object|string> $method Method defined in an array form
-     * @param Closure                  $mock   Replacement code for the method
-     * @param string                   $args   Comma-delimited list of arguments for the redefined method
+     * @param CallableMethod $method Method defined in an array form
+     * @param Closure        $mock   Replacement code for the method
+     * @param string         $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -309,7 +311,7 @@ abstract class LegacyBaseTest extends TestCase
     /**
      * Unmock a method.
      *
-     * @param array<int,object|string> $method Method defined in an array form
+     * @param CallableMethod $method Method defined in an array form
      *
      * @return void
      */
@@ -321,7 +323,7 @@ abstract class LegacyBaseTest extends TestCase
     /**
      * Unmock a method with uopz.
      *
-     * @param array<int,object|string> $method Method defined in an array form
+     * @param CallableMethod $method Method defined in an array form
      *
      * @return void
      */
