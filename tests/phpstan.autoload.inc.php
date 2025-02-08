@@ -18,11 +18,22 @@ if (file_exists($base . '/vendor/autoload.php') == TRUE)
 }
 else
 {
-    // Load decomposer autoloade.
+    // Load decomposer autoloader.
     $autoload_file = $base . '/decomposer.autoload.inc.php';
 }
 
 require_once $autoload_file;
+
+if (file_exists($base . '/vendor/autoload.php') == FALSE)
+{
+    include_once 'Framework/MockObject/Runtime/Interface/Stub.php';
+    include_once 'Framework/MockObject/Runtime/Interface/MockObject.php';
+    include_once 'Framework/Assert.php';
+    include_once 'Framework/Reorderable.php';
+    include_once 'Framework/SelfDescribing.php';
+    include_once 'Framework/Test.php';
+    include_once 'Framework/TestCase.php';
+}
 
 // Define application config lookup path
 $paths = [
