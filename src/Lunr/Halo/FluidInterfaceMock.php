@@ -18,7 +18,7 @@ class FluidInterfaceMock
 
     /**
      * Array of mocked return values
-     * @var array<string, mixed>
+     * @var array<string, mixed[]>
      */
     protected array $return;
 

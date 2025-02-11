@@ -20,6 +20,8 @@ use RuntimeException;
 
 /**
  * This class contains helper code for the Lunr unit tests.
+ *
+ * @phpstan-type CallableMethod array{0:object|string,1:string}
  */
 abstract class LunrBaseTestCase extends TestCase
 {
@@ -97,7 +99,13 @@ abstract class LunrBaseTestCase extends TestCase
 
         if ($class instanceof MockObject)
         {
-            $this->reflection = new ReflectionClass(get_parent_class($class));
+            /**
+             * MockObject *must* have a parent, so this can't return FALSE.
+             * @var class-string<object> $instance
+             */
+            $instance = get_parent_class($class);
+
+            $this->reflection = new ReflectionClass($instance);
         }
         else
         {
@@ -353,10 +361,10 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array<int,object|string> $method     Method defined in an array form
-     * @param Closure                  $mock       Replacement code for the method
-     * @param string                   $visibility Visibility of the redefined method
-     * @param string                   $args       Comma-delimited list of arguments for the redefined method
+     * @param CallableMethod $method     Method defined in an array form
+     * @param Closure        $mock       Replacement code for the method
+     * @param string         $visibility Visibility of the redefined method
+     * @param string         $args       Comma-delimited list of arguments for the redefined method
      *
      * @deprecated Use mockMethod() instead
      *
@@ -372,10 +380,10 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array<int,object|string> $method     Method defined in an array form
-     * @param Closure                  $mock       Replacement code for the method
-     * @param string                   $visibility Visibility of the redefined method
-     * @param string                   $args       Comma-delimited list of arguments for the redefined method
+     * @param CallableMethod $method     Method defined in an array form
+     * @param Closure        $mock       Replacement code for the method
+     * @param string         $visibility Visibility of the redefined method
+     * @param string         $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -390,9 +398,9 @@ abstract class LunrBaseTestCase extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param array<int,object|string> $method Method defined in an array form
-     * @param Closure                  $mock   Replacement code for the method
-     * @param string                   $args   Comma-delimited list of arguments for the redefined method
+     * @param CallableMethod $method Method defined in an array form
+     * @param Closure        $mock   Replacement code for the method
+     * @param string         $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -430,7 +438,7 @@ abstract class LunrBaseTestCase extends TestCase
     /**
      * Unmock a method.
      *
-     * @param array<int,object|string> $method Method defined in an array form
+     * @param CallableMethod $method Method defined in an array form
      *
      * @deprecated Use unmockMethod() instead
      *
@@ -444,7 +452,7 @@ abstract class LunrBaseTestCase extends TestCase
     /**
      * Unmock a method.
      *
-     * @param array<int,object|string> $method Method defined in an array form
+     * @param CallableMethod $method Method defined in an array form
      *
      * @return void
      */
@@ -456,7 +464,7 @@ abstract class LunrBaseTestCase extends TestCase
     /**
      * Unmock a method with uopz.
      *
-     * @param array<int,object|string> $method Method defined in an array form
+     * @param CallableMethod $method Method defined in an array form
      *
      * @return void
      */
