@@ -52,10 +52,8 @@ class FluidInterfaceMock
         {
             return array_pop($this->return[$name]);
         }
-        else
-        {
-            return $this;
-        }
+
+        return $this;
     }
 
     /**
