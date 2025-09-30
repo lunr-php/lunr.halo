@@ -15,6 +15,6 @@ jobs:
       codestyle-branch: '0.11.0'
       phpcs-whitelist: tests/phpstan.autoload.inc.php tests/test.bootstrap.inc.php
       php-extensions: uopz
-      stable-php-versions: '["8.1"]'
-      experimental-php-versions: '["8.2","8.3"]'
+      stable-php-versions: '["8.3"]'
+      experimental-php-versions: '["8.4","8.5"]'
       minimum-phpunit-version: '10.5.x'
