@@ -580,7 +580,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     protected function assertPropertyEquals(string $property, $expected): void
     {
-        $this->assertEquals($expected, $this->get_reflection_property_value($property));
+        $this->assertEquals($expected, $this->getReflectionPropertyValue($property));
     }
 
     /**
@@ -593,7 +593,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     protected function assertPropertySame(string $property, $expected): void
     {
-        $this->assertSame($expected, $this->get_reflection_property_value($property));
+        $this->assertSame($expected, $this->getReflectionPropertyValue($property));
     }
 
     /**
@@ -605,7 +605,7 @@ abstract class LunrBaseTestCase extends TestCase
      */
     protected function assertPropertyEmpty(string $property): void
     {
-        $this->assertEmpty($this->get_reflection_property_value($property));
+        $this->assertEmpty($this->getReflectionPropertyValue($property));
     }
 
     /**
@@ -619,7 +619,7 @@ abstract class LunrBaseTestCase extends TestCase
     {
         $this->assertTrue(property_exists($this->class, $name));
 
-        $property = $this->get_reflection_property($name);
+        $property = $this->getReflectionProperty($name);
 
         $this->assertFalse($property->isInitialized($this->class));
     }
