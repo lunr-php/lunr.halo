@@ -27,7 +27,7 @@ trait PsrLoggerTestTrait
      */
     public function testLoggerIsSetCorrectly(): void
     {
-        $property = $this->get_reflection_property_value($this->propertyNameLogger);
+        $property = $this->getReflectionPropertyValue($this->propertyNameLogger);
 
         $this->assertSame($property, $this->logger);
         $this->assertInstanceOf('Psr\Log\LoggerInterface', $property);
