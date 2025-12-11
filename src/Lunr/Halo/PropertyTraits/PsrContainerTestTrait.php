@@ -26,7 +26,7 @@ trait PsrContainerTestTrait
      */
     public function testContainerIsSetCorrectly(): void
     {
-        $property = $this->getReflectionPropertyValue($this->propertyNameContainer);
+        $property = $this->get_reflection_property_value($this->propertyNameContainer);
 
         $this->assertSame($property, $this->container);
         $this->assertInstanceOf('Psr\Container\ContainerInterface', $property);
